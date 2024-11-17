@@ -14,7 +14,7 @@ body {
   text-align: center;
   font-family: 'PixelSix00', sans-serif;
   color: #f4b9cf;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
 }
 
@@ -33,4 +33,8 @@ button .text-sans{
   border-radius: 35%;
   border: 0px;
   margin-bottom: 5px;
+}
+
+.botao-menu:hover{
+  background-image: url('/assets/xadrezrosa.jpg');
 }
