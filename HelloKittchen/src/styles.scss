@@ -1,0 +1,36 @@
+
+
+body {
+    background-image: url('/assets/papeldeparede.jpg');
+    background-size: cover;
+}
+
+.menu {
+  border-radius: 15%;
+  background-color: #fffdf1;
+}
+
+.text-sans{
+  text-align: center;
+  font-family: 'PixelSix00', sans-serif;
+  color: #f4b9cf;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+button .text-sans{
+  text-align: center;
+  font-family: 'Comic Sans MS', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.botao-menu{
+  background-image: url('/assets/xadrezamarelo.png');
+  background-size: cover;
+  max-width: 80px;
+  max-height: 20px;
+  border-radius: 35%;
+  border: 0px;
+  margin-bottom: 5px;
+}

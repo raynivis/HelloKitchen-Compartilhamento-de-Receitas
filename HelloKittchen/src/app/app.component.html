@@ -1,0 +1,37 @@
+<app-header></app-header>
+  <main class="row d-flex justify-content-center principal">
+      <!-- Sidebar -->
+      <aside class="col-md-1 sidebar">
+         <nav class="menu">
+            <figure class="d-flex justify-content-center">
+                @for (item of [1,2,3,4]; track $index) {
+                    <svg width="20" height="20">
+                        <image href="assets/gifs/kitty asas.gif" x="0" y="0" width="20" height="20"/>
+                    </svg>
+                }             
+            </figure>
+            <div class="d-flex justify-content-center row d-flex align-items-center">
+                <h6 class="text-sans">Menu</h6>
+                <button class="botao-menu">
+                    <p class="text-sans" style="color: #f0484a;"><img src="assets/auxiliares/maca.png" width="12" height="12" alt=""> Home</p>
+                </button>
+                <button class="botao-menu ">
+                    <p class="text-sans" style=" color: #b6bf41;"><img src="assets/auxiliares/melao.png" width="12" height="10" alt=""> News</p>
+                </button>
+            </div>
+            
+         </nav>
+         
+      </aside>
+      <!-- Main Section -->
+      <section class="col-md-5 main-section">
+          <h2>Welcome!</h2>
+          <p>This is a place where you can find all sorts of recipes and nostalgic content. Feel free to explore and enjoy your stay!</p>
+          <h3>Featured Recipe</h3>
+          <p>Check out our special recipe of the day!</p>
+      </section>
+      <!-- Right Sidebar -->
+      <aside class="col-md-1 right-sidebar">
+          
+      </aside>
+  </main>
