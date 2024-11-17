@@ -1,5 +1,5 @@
 <app-header></app-header>
-  <main class="row d-flex justify-content-center principal">
+  <main class="row d-flex justify-content-center principal" style="font-family: cursive;">
       <!-- Sidebar -->
       <aside class="col-md-1 sidebar">
          <nav class="menu">
@@ -45,13 +45,88 @@
       </aside>
       <!-- Main Section -->
       <section class="col-md-5 main-section">
-          <h2>Welcome!</h2>
-          <p>This is a place where you can find all sorts of recipes and nostalgic content. Feel free to explore and enjoy your stay!</p>
-          <h3>Featured Recipe</h3>
-          <p>Check out our special recipe of the day!</p>
+        <ng-container *ngIf="isAuthenticated; else guestView">
+          <!-- Exibição para usuário logado -->
+          <h2>Bem-vinde, {{ userName }}!</h2>
+          <p>Estamos felizes em te ver de volta. Confira nossas receitas mais recentes!</p>
+        </ng-container>
+    
+        <ng-template #guestView>
+          <!-- Exibição para visitante -->
+          <h2>Bem-vinde!</h2>
+          <p>Faça login para acessar conteúdos exclusivos!</p>
+        </ng-template>
       </section>
+    
       <!-- Right Sidebar -->
       <aside class="col-md-1 right-sidebar">
-          
+        <ng-container *ngIf="!isAuthenticated">
+          <!-- Botão de login/cadastro -->
+          <button type="button" class="btn" style="background-color: #4a291e; color:#fef7a6;" data-bs-toggle="modal" data-bs-target="#userModal">
+            Login ou Cadastro
+          </button>
+        </ng-container>
+        <ng-container *ngIf="isAuthenticated">
+          <!-- Dados de sessão -->
+          <p class="text" style="color:#fef7a6;">Logado como: {{ userName }}</p>
+          <button class="btn btn-danger" (click)="logout()">Sair</button>
+        </ng-container>
       </aside>
   </main>
+
+  <!-- Modal -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true" style="font-family: cursive;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content custom-modal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel">Se você já tiver uma conta só logar, senão crie rapidinho</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Tabs para Login e Cadastro -->
+        <ul class="nav nav-pills justify-content-center mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login" type="button" role="tab" aria-controls="pills-login" aria-selected="true">Login</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#pills-register" type="button" role="tab" aria-controls="pills-register" aria-selected="false">Cadastro</button>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <!-- Formulário de Login -->
+          <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
+            <form (submit)="login($event)">
+              <div class="mb-3">
+                <label for="loginEmail" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="loginEmail" [(ngModel)]="loginData.email" placeholder="Digite seu e-mail" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="loginPassword" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="loginPassword" [(ngModel)]="loginData.password" placeholder="Digite sua senha" name="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            </form>
+          </div>
+          <!-- Formulário de Cadastro -->
+          <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="pills-register-tab">
+            <form (submit)="register($event)">
+              <div class="mb-3">
+                <label for="registerName" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="registerName" [(ngModel)]="registerData.name" placeholder="Digite seu nome" name="name" required>
+              </div>
+              <div class="mb-3">
+                <label for="registerEmail" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="registerEmail" [(ngModel)]="registerData.email" placeholder="Digite seu e-mail" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="registerPassword" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="registerPassword" [(ngModel)]="registerData.password" placeholder="Digite sua senha" name="password" required>
+              </div>
+              <button type="submit" class="btn btn-success w-100">Cadastrar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
