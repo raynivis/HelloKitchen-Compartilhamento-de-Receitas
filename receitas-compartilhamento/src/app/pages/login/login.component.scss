@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url('../../../../public/pompurimBackground.jpg'); // Adicione sua imagem de fundo
+  background-size: cover;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.card-kawaii {
+  background: #fff6d5;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2em;
+  color: #855d35;
+}
+
+p {
+  color: #666;
+  font-size: 0.9em;
+}
+
+a {
+  color: #d17d55;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.input-field {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  border-radius: 5px;
+  border: 1px solid #d3a35d;
+  background: #ffefd8;
+}
+
+.button-kawaii {
+  background-color: #d17d55;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.button-kawaii:hover {
+  background-color: #b05d43;
+}
+
+.message {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}

@@ -1,0 +1,14 @@
+<div class="recipes-container">
+    <h2>Receitas do Livro</h2>
+    <div *ngIf="recipes && recipes.length > 0; else noRecipes">
+      <ul>
+        <li *ngFor="let recipe of recipes">
+          {{ recipe.name }} - {{ recipe.description }}
+        </li>
+      </ul>
+    </div>
+    <ng-template #noRecipes>
+      <p>Não há receitas disponíveis neste livro.</p>
+    </ng-template>
+  </div>
+  

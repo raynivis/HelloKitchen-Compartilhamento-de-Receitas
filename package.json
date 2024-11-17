@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@angular/cli": "^18.2.11",
+    "@angular/forms": "^18.2.11",
+    "primeicons": "^7.0.0",
+    "primeng": "^17.18.11"
+  }
+}
