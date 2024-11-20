@@ -1,22 +1,18 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet, ROUTES, Routes } from '@angular/router';
-import { HeaderComponent } from "./layout/header/header.component";
-import { AuthService } from './services/auth.service';
+import { MenuPerfilComponent } from "./menu-perfil/menu-perfil.component";
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { LeftBarComponent } from "./layout/left-bar/left-bar.component";
-import { HomeComponent } from "./layout/pages/home/home.component";
-import { RightBarComponent } from "./layout/right-bar/right-bar.component";
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-right-bar',
   standalone: true,
-  imports: [HeaderComponent, FormsModule, CommonModule, LeftBarComponent, RouterOutlet, RightBarComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [MenuPerfilComponent,  FormsModule, CommonModule,],
+  templateUrl: './right-bar.component.html',
+  styleUrl: './right-bar.component.scss'
 })
-export class AppComponent {
+export class RightBarComponent {
   user: { id: string; name: string; email: string } | null = null;
   private http = inject(HttpClient); // Injeta o HttpClient
   // Dados para Login e Cadastro
@@ -111,6 +107,5 @@ export class AppComponent {
   updateUIForAuthenticatedUser(): void {
     this.isAuthenticated = true; // Variável de estado no componente
   }
-
 
 }

@@ -1,14 +1,8 @@
 
-
 body {
     background-image: url('/assets/papeldeparede.jpg');
     background-size: cover;
     overflow-x: hidden;
-}
-
-.menu {
-  border-radius: 15%;
-  background-color: #fffdf1;
 }
 
 .text-sans{
@@ -26,16 +20,9 @@ button .text-sans{
   font-weight: bold;
 }
 
-.botao-menu{
-  background-image: url('/assets/xadrezamarelo.png');
-  background-size: cover;
-  max-width: 80px;
-  max-height: 20px;
-  border-radius: 35%;
-  border: 0px;
-  margin-bottom: 5px;
+.menu {
+  margin-top: 5px;
+  border-radius: 15%;
+  background-color: #fffdf1;
 }
 
-.botao-menu:hover{
-  background-image: url('/assets/xadrezrosa.jpg');
-}
