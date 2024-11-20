@@ -1,0 +1,53 @@
+.perfil-menu img{
+  width: 60px;
+  height: 41px;
+  margin: 2px;
+  border-radius: 50%;
+}
+
+.perfil-menu p{
+  font-size: 10px;
+  margin-bottom: 1px;
+}
+
+.nome{
+  font-size: 10px;
+  color: #70564e;
+  font-weight: bold;
+  max-width: 80px;
+  max-height: 20px;
+  background-image: url('/assets/xadrezamarelo.png');
+  background-size: cover;
+  border-radius: 35%;
+  border: 0px;
+  margin-bottom: 5px;
+}
+
+.botao-perfil{
+  background-image: url('/assets/xadrezamarelo.png');
+  background-size: cover;
+  max-width: 80px;
+  max-height: auto;
+  border-radius: 35%;
+  border: 0px;
+  margin-bottom: 5px;
+}
+
+.botao-perfil:hover{
+  background-image: url('/assets/xadrezrosa.jpg');
+}
+
+.botao-sair{
+  background-image: url('/assets/xadrezamarelo.png');
+  background-size: cover;
+  max-width: 80px;
+  max-height: auto;
+  border-radius: 35%;
+  border: 0px;
+  margin-bottom: 5px;
+}
+
+.botao-sair:hover{
+  background-image: url('/assets/xadrezvermelho.png');
+  background-color: #b14052;
+}

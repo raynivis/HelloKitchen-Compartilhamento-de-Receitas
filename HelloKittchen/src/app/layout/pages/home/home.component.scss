@@ -1,0 +1,46 @@
+.post {
+  background-image: url('/assets/xadrezrosa2.jpg');
+  background-repeat: repeat;
+  background-size: cover;
+  overflow-x: hidden;
+  border-radius: 5%;
+  margin: 5px;
+}
+
+.inside-post {
+  background-color: #fefbf0;
+  margin: 5px;
+  border-radius: 5%;
+  border: 8px solid;
+  border-color: #fff8ea;
+}
+
+.inside-post div img {
+  left: 0;
+  top: 0;
+  width: 35px;
+  height: 39px;
+  background-color: #ffe8e0;
+  border: 1px solid #000;
+}
+
+.text-post {
+  font-size: 12px;
+}
+
+.post-tag {
+  padding: 3px;
+  background-color: #fff8ac;
+  color: #774b3c;
+  border-radius: 20%;
+  margin-left: 2px;
+}
+
+.btn-page {
+  background-image: url('/assets/xadrezrosa.jpg');
+  background-size: cover;
+  border-radius: 20%;
+  border: 0px;
+  margin-bottom: 5px;
+}
+
