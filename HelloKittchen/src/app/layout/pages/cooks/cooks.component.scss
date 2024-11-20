@@ -1,4 +1,9 @@
 .btn-categoria{
-  background-image: url('/assets/xadrezmarrom3.jpg');
-  border-radius: 40%;
+  background-image: url('/assets/xadrezamarelo2.png');
+  background-repeat: repeat;
+  border-radius: 5%;
+}
+
+.btn-categoria:hover{
+  color: #fdb4d7;
 }
