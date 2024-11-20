@@ -1,3 +1,4 @@
+import { ImagesPefilService } from './../../../services/images.pefil.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
@@ -19,7 +20,7 @@ export class HomeComponent {
   isAuthenticated = false;
   userName = ''; // Armazena o nome do usuário logado
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, public imageService: ImagesPefilService) {
     this.checkAuthentication();
   }
 
