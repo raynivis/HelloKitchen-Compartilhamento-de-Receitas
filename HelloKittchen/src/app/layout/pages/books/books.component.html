@@ -1,0 +1,67 @@
+<article class="col-md-12 post">
+  <!--Post Livros-->
+  <div class="d-flex justify-content-center inside-post ">
+    <app-content-books></app-content-books>
+  </div>
+</article>
+
+@for (item of [1,2,3]; track $index) {
+<!--Post Livros-->
+<article class="col-md-12 post">
+  <div class="d-flex flex-row inside-post">
+
+    <div style="padding-right: 3px;">
+      <img [src]="imageService.getPerfilAleatorio(item)" alt="imagem de perfil"> <!--quero usar ts nesse alt-->
+    </div>
+    <div class="p-2 flex-fill text-post text-center book shadow-sm bg-body-tertiary">
+      <div class="d-flex justify-content-start align-items-end">
+
+        <div class="post" style="border-radius: 45%;">
+          <div class="inside-post" style="border-radius: 45%;">
+            <p style="
+               font-family: 'PixelSix00', sans-serif; color: #f4b9cf; font-size: 11px; height: 1px;">
+              ray marques
+            </p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <h6 style="color: #f4b9cf; background-color: #fdfeff;">"nome do livro" book's</h6>
+        <!--Avaliação (mudar depois)-->
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#f8d92a">
+          <path
+            d="m352-293 128-76 129 76-34-144 111-95-147-13-59-137-59 137-147 13 112 95-34 144ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Zm237-333Z" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#f8d92a">
+          <path
+            d="m352-293 128-76 129 76-34-144 111-95-147-13-59-137-59 137-147 13 112 95-34 144ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Zm237-333Z" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#f8d92a">
+          <path
+            d="m352-293 128-76 129 76-34-144 111-95-147-13-59-137-59 137-147 13 112 95-34 144ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Zm237-333Z" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#f8d92a">
+          <path
+            d="m352-293 128-76 129 76-34-144 111-95-147-13-59-137-59 137-147 13 112 95-34 144ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Zm237-333Z" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#f8d92a">
+          <path
+            d="m609-293-34-144 111-95-147-13-59-137v313l129 76ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
+        </svg>
+
+      </div>
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn-page" [routerLink]="'/book'">
+          <svg width="40" height="40">
+            <image href="assets/auxiliares/hello-ler.png" width="40" height="40">
+            </image>
+          </svg>
+          Quero ver as receitas!
+        </button>
+      </div>
+    </div>
+  </div>
+</article>
+}
