@@ -1,0 +1,17 @@
+<nav class="menu ">
+  <app-menu-perfil></app-menu-perfil>
+</nav>
+
+<br>
+<ng-container *ngIf="!isAuthenticated">
+  <!-- Botão de login/cadastro -->
+  <button type="button" class="btn" style="background-color: #4a291e; color:#fef7a6;" data-bs-toggle="modal"
+    data-bs-target="#userModal">
+    Login ou Cadastro
+  </button>
+</ng-container>
+<ng-container *ngIf="isAuthenticated">
+  <!-- Dados de sessão -->
+  <p class="text" style="color:#fef7a6;">Logado como: {{ userName }}</p>
+  <button class="btn btn-danger" (click)="logout()">Sair</button>
+</ng-container>
