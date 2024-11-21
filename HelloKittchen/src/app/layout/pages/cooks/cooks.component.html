@@ -1,14 +1,19 @@
 <article class="col-md-12 post">
   <!--Categorias-->
-   <div class="d-flex justify-content-center inside-post ">
+  <div class="d-flex justify-content-center inside-post ">
     <div class="d-grid gap-2">
-      <h6 class="texto-titulo">°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･<br>Categorias de Receitas<br>°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･</h6>
-      <button class="btn btn-categoria" type="button">Button</button>
-      <button class="btn btn-categoria" type="button">Button</button>
+      <h6 class="texto-titulo text-center">°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･<br>Categorias de Receitas<br>°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･</h6>
+      @for (categoria of categorias; track $index){
+      <button class="btn btn-categoria texto-titulo" type="button" [routerLink]="['/categoria', categoria.id]">
+        <svg width="35" height="35">
+          <image width="35" height="35" href="assets/gifs/cinnacategorias.gif"></image>
+        </svg>
+        {{categoria.name}}
+        <svg width="35" height="35">
+          <image width="35" height="35" href="assets/gifs/cinnacategorias.gif"></image>
+        </svg>
+      </button>
+      }
     </div>
-
   </div>
 </article>
-
-
-

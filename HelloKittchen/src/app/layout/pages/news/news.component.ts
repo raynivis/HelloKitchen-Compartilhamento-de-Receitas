@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ContentNewsComponent } from "./content-news/content-news.component";
-import { ImagesPefilService } from '../../../services/images.pefil.service';
+import { ImagesPefilService } from '../../../additional/images.pefil.service';
 
 @Component({
   selector: 'app-news',
