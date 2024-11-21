@@ -1,17 +1,17 @@
 <article class="col-md-12 post">
-  <!--Post Livros-->
+  <!--Post dos Livros-->
   <div class="d-flex justify-content-center inside-post ">
     <app-content-books></app-content-books>
   </div>
 </article>
 
-@for (item of [1,2,3]; track $index) {
-<!--Post Livros-->
+@for (livro of livros; track $index) {
+<!--Post Livro-->
 <article class="col-md-12 post">
   <div class="d-flex flex-row inside-post">
 
     <div style="padding-right: 3px;">
-      <img [src]="imageService.getPerfilAleatorio(item)" alt="imagem de perfil"> <!--quero usar ts nesse alt-->
+      <img [src]="imageService.getPerfilAleatorio(livro.user.id)" alt="imagem de perfil"> <!--quero usar ts nesse alt-->
     </div>
     <div class="p-2 flex-fill text-post text-center book shadow-sm bg-body-tertiary">
       <div class="d-flex justify-content-start align-items-end">

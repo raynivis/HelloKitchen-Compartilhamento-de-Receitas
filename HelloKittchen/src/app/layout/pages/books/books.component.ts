@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { ImagesPefilService } from '../../../services/images.pefil.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { ImagesPefilService } from '../../../additional/images.pefil.service';
 import { ContentBooksComponent } from "./content-books/content-books.component";
 import { RouterModule } from '@angular/router';
+import { LivroService } from '../../../services/livro.service';
+import { Livro } from '../../../models/livro.model';
 
 @Component({
   selector: 'app-books',
@@ -10,9 +12,18 @@ import { RouterModule } from '@angular/router';
   templateUrl: './books.component.html',
   styleUrl: './books.component.scss'
 })
-export class BooksComponent {
+export class BooksComponent implements OnInit{
+  public readonly imageService = inject(ImagesPefilService);
+  private readonly livrosService = inject(LivroService);
+  livros: Livro[] = [];
 
-  constructor(public imageService: ImagesPefilService){
 
+  ngOnInit(): void {
+    this.livrosService.list().subscribe((dado) => {
+      this.livros = dado;
+    });
   }
+
+
+
 }

@@ -5,6 +5,7 @@ import { Column, Entity, ManyToOne, OneToMany, Unique } from 'typeorm';
 import { Ingredient } from './ingredient.entity';
 import { Instruction } from './instruction.entity';
 import { Rating } from './rating.entity';
+import { Image } from './image.entity';
 
 @Entity()
 @Unique(['name', 'user'])
@@ -48,4 +49,7 @@ export class Recipe extends BaseEntity {
 
   @OneToMany(() => Rating, (rating) => rating.recipe, { eager: true })
   ratings: Rating[];
+
+  @OneToMany(() => Image, (image) => image.recipe, { eager: true })
+  images: Image[];
 }
