@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ImagesPefilService } from '../../../../services/images.pefil.service';
+import { ImagesPefilService } from '../../../../additional/images.pefil.service';
 
 @Component({
   selector: 'app-books-page',
