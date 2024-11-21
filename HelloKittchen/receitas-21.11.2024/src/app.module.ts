@@ -7,6 +7,8 @@ import { BooksModule } from './books/books.module';
 import { RecipesModule } from './recipes/recipes.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -16,6 +18,9 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
       database: 'database/recipes.db',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'upload'),
     }),
     AuthModule,
     CategoriesModule,

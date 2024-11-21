@@ -1,11 +1,16 @@
 import {
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { CurrentUser, IsPublic } from '@shared/decorators';
+import {
+  ApiPaginatedResponse,
+  CurrentUser,
+  IsPublic,
+} from '@shared/decorators';
 
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -23,5 +28,11 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   login(@CurrentUser() user: User) {
     return this.authService.login(user);
+  }
+
+  @ApiPaginatedResponse(User)
+  @Get('me')
+  me(@CurrentUser() user: User) {
+    return user;
   }
 }

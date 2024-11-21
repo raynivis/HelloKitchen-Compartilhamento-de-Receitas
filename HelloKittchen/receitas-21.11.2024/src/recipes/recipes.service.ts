@@ -2,20 +2,11 @@ import { RecordNotFoundException } from '@exceptions';
 import { Inject, Injectable, Scope } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { paginate, Pagination } from 'nestjs-typeorm-paginate';
-import {
-  Equal,
-  FindManyOptions,
-  FindOptionsWhere,
-  ILike,
-  IsNull,
-  Not,
-  Repository,
-} from 'typeorm';
+import { FindOptionsWhere, ILike, IsNull, Not, Repository } from 'typeorm';
 
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { Recipe } from './entities/recipe.entity';
-import { QueryListDto } from '@shared/dto/query-list.dto';
 import { RecipeIsPublishedException } from '@exceptions/recipe-is-published.exception';
 import { Ingredient } from './entities/ingredient.entity';
 import { CreateIngredientDto } from './dto/create-ingredient.dto';
@@ -28,6 +19,8 @@ import { Rating } from './entities/rating.entity';
 import { CreateRatingDto } from './dto/create-rating.dto';
 import { RecipeIsNotPublishedException } from '@exceptions/recipe-is-not-published.exception';
 import { RecipeIsRateException } from '@exceptions/recipe-is-rating.exception';
+import { QueryListRecipeDto } from './dto/query-list.dto';
+import { Image } from './entities/image.entity';
 
 @Injectable({ scope: Scope.REQUEST })
 export class RecipesService {
@@ -40,6 +33,8 @@ export class RecipesService {
     private repositoryInstruction: Repository<Instruction>,
     @InjectRepository(Rating)
     private repositoryRating: Repository<Rating>,
+    @InjectRepository(Image)
+    private repositoryImage: Repository<Image>,
     @Inject(REQUEST)
     private request: Request | any,
   ) {}
@@ -49,11 +44,12 @@ export class RecipesService {
     return this.repository.save(record);
   }
 
-  findAll(query: QueryListDto, user?: User): Promise<Pagination<Recipe>> {
-    const where: FindOptionsWhere<Recipe>[] = [];
-    if (query.search) where.push({ name: ILike(`%${query.search}%`) });
-    if (user) where.push({ user: { id: user.id } });
-    else where.push({ published_at: Not(IsNull()) });
+  findAll(query: QueryListRecipeDto, user?: User): Promise<Pagination<Recipe>> {
+    const where: FindOptionsWhere<Recipe> = {};
+    if (query.search) where.name = ILike(`%${query.search}%`);
+    if (query.category) where.category = { id: query.category };
+    if (user) where.user = { id: user.id };
+    else where.published_at = Not(IsNull());
 
     return paginate<Recipe>(this.repository, query, { where });
   }
@@ -160,6 +156,43 @@ export class RecipesService {
     });
     this.repository.update(recipeId, { score: average });
     return rating;
+  }
+
+  async saveImage(recipeId: number, file: Express.Multer.File) {
+    await this.checkCanUpdate(recipeId);
+    const image = await this.repositoryImage.findOneBy({
+      recipe: { id: recipeId },
+    });
+    const newImage = {
+      fileName: file.filename,
+      contentLength: file.size,
+      contentType: file.mimetype,
+      url: `${this.request.protocol}://${this.request.get('host')}/files/recipes/${file.filename}`,
+      recipe: { id: recipeId },
+    };
+    if (image) {
+      const fs = require('fs');
+      fs.unlink(
+        './upload/' +
+          image.url.replace(
+            `${this.request.protocol}://${this.request.get('host')}`,
+            '',
+          ),
+        (err) => {
+          if (err) {
+            console.error(`Error removing file: ${err}`);
+            return;
+          }
+
+          console.log(`File ${image.url} has been successfully removed.`);
+        },
+      );
+      await this.repositoryImage.update(image.id, newImage);
+      return this.repositoryImage.findOneBy({ id: image.id });
+    } else {
+      const record = this.repositoryImage.create(newImage);
+      return this.repositoryImage.save(record);
+    }
   }
 
   private async checkCanUpdate(id: number) {
