@@ -66,3 +66,16 @@ body {
   margin-bottom: 5px;
 }
 
+.botao-menu{
+  background-image: url('/assets/xadrezamarelo.png');
+  background-size: cover;
+  max-width: 80px;
+  max-height: 20px;
+  border-radius: 15%;
+  border: 0px;
+  margin-bottom: 5px;
+}
+
+.botao-menu:hover{
+  background-image: url('/assets/xadrezrosa.jpg');
+}

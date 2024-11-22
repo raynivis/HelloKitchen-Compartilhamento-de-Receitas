@@ -1,8 +1,8 @@
 <div class="perfil-menu d-flex justify-content-center row d-flex align-items-center text-center">
-  @if (false) {
-  <img src="assets/icons/mymelody.png" alt="">
+  @if (isAuthenticated) {
+  <img class="foto" src="assets/icons/mymelody.png" alt="">
   <p class="nome">
-    raymarques
+    {{ userName }}
   </p>
   <P>rating:</P>
   <div class="d-flex align-items-center text-center">
@@ -30,16 +30,20 @@
   <svg width="100" height="80">
     <image width="88" height="60" href="assets/gifs/gifDireita.gif"></image>
   </svg>
-  <button class="botao-perfil">
-    <p> minhas receitas</p>
+  <button class="botao-menu" [routerLink]="'/books'">
+    <p class="text-sans" style=" color: #f1576c;"><img src="assets/auxiliares/cereja.png" width="14" height="12" 
+        alt=""> books </p>
   </button>
-  <button class="botao-sair">
+  <button class="botao-menu">
+    <p> my receipes</p>
+  </button>
+  <button class="botao-sair" (click)="logout()">
     <p>sign out</p>
   </button>
   } @else {
-    <img src="assets/icons/logout.png" alt="">
-    <button class="botao-perfil">
-      <p> entrar </p>
+    <img class="foto" src="assets/icons/logout.png" alt="">
+    <button type="button" class="botao-menu" data-bs-toggle="modal" data-bs-target="#userModal">
+      <p> login </p>
     </button>
     <p>
       acesse sua conta para ter uma melhor interação no nosso site (✿◕‿◕)ﾉ
@@ -54,3 +58,69 @@
   <p>≽^- ˕ -^≼</p>
   <p>૮₍˶Ó﹏Ò ⑅₎ა</p>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true"
+  style="font-family: cursive;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content custom-modal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel">Se você já tiver uma conta só logar, senão crie rapidinho</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Tabs para Login e Cadastro -->
+        <ul class="nav nav-pills justify-content-center mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login"
+              type="button" role="tab" aria-controls="pills-login" aria-selected="true">Login</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#pills-register"
+              type="button" role="tab" aria-controls="pills-register" aria-selected="false">Cadastro</button>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <!-- Formulário de Login -->
+          <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
+            <form (submit)="login($event)">
+              <div class="mb-3">
+                <label for="loginEmail" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="loginEmail" [(ngModel)]="loginData.email"
+                  placeholder="Digite seu e-mail" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="loginPassword" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="loginPassword" [(ngModel)]="loginData.password"
+                  placeholder="Digite sua senha" name="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            </form>
+          </div>
+          <!-- Formulário de Cadastro -->
+          <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="pills-register-tab">
+            <form (submit)="register($event)">
+              <div class="mb-3">
+                <label for="registerName" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="registerName" [(ngModel)]="registerData.name"
+                  placeholder="Digite seu nome" name="name" required>
+              </div>
+              <div class="mb-3">
+                <label for="registerEmail" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="registerEmail" [(ngModel)]="registerData.email"
+                  placeholder="Digite seu e-mail" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="registerPassword" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="registerPassword" [(ngModel)]="registerData.password"
+                  placeholder="Digite sua senha" name="password" required>
+              </div>
+              <button type="submit" class="btn btn-success w-100">Cadastrar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

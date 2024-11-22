@@ -1,4 +1,4 @@
-.perfil-menu img{
+.perfil-menu .foto{
   width: 60px;
   height: 41px;
   margin: 2px;
@@ -15,7 +15,7 @@
   color: #70564e;
   font-weight: bold;
   max-width: 80px;
-  max-height: 20px;
+  max-height: auto;
   background-image: url('/assets/xadrezamarelo.png');
   background-size: cover;
   border-radius: 35%;
@@ -27,8 +27,8 @@
   background-image: url('/assets/xadrezamarelo.png');
   background-size: cover;
   max-width: 80px;
-  max-height: auto;
-  border-radius: 35%;
+  max-height: 20px;
+  border-radius: 15%;
   border: 0px;
   margin-bottom: 5px;
 }
@@ -42,7 +42,7 @@
   background-size: cover;
   max-width: 80px;
   max-height: auto;
-  border-radius: 35%;
+  border-radius: 15%;
   border: 0px;
   margin-bottom: 5px;
 }
@@ -50,4 +50,32 @@
 .botao-sair:hover{
   background-image: url('/assets/xadrezvermelho.png');
   background-color: #b14052;
+}
+
+.custom-modal .modal-body {
+  background-image: url('/assets/xadrezamarelo.png');
+}
+
+.custom-modal .modal-header {
+  background-color: #fef7a6;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.custom-modal .nav-pills .nav-link.active {
+  background-color: #4a291e;
+  color: #fef7a6;
+}
+
+.custom-modal .nav-pills .nav-link {
+  color: #495057;
+}
+
+.custom-modal .btn-primary {
+  background-color: #4a291e;
+  border-color: #4a291e;
+}
+
+.custom-modal .btn-success {
+  background-color: #4a291e;
+  border-color: #f13684;
 }
