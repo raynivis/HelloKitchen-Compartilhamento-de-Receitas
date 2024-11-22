@@ -14,17 +14,8 @@ import { ContentWcComponent } from "./content-wc/content-wc.component";
 export class HomeComponent {
   user: { id: string; name: string; email: string } | null = null;
   private http = inject(HttpClient); // Injeta o HttpClient
-  isAuthenticated = false;
   userName = ''; // Armazena o nome do usuário logado
 
-  constructor(private authService: AuthService, public imageService: ImagesPefilService) {
-    this.checkAuthentication();
-  }
-
-  checkAuthentication(): void {
-    this.isAuthenticated = this.authService.isAuthenticated();
-    if (this.isAuthenticated) {
-      this.userName = 'Mayara';
-    }
+  constructor(public imageService: ImagesPefilService) {
   }
 }

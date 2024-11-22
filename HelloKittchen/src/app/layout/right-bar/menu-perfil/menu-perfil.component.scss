@@ -1,4 +1,4 @@
-.perfil-menu img{
+.perfil-menu .foto{
   width: 60px;
   height: 41px;
   margin: 2px;
@@ -15,7 +15,7 @@
   color: #70564e;
   font-weight: bold;
   max-width: 80px;
-  max-height: 20px;
+  max-height: auto;
   background-image: url('/assets/xadrezamarelo.png');
   background-size: cover;
   border-radius: 35%;
@@ -27,8 +27,8 @@
   background-image: url('/assets/xadrezamarelo.png');
   background-size: cover;
   max-width: 80px;
-  max-height: auto;
-  border-radius: 35%;
+  max-height: 20px;
+  border-radius: 15%;
   border: 0px;
   margin-bottom: 5px;
 }
@@ -42,7 +42,7 @@
   background-size: cover;
   max-width: 80px;
   max-height: auto;
-  border-radius: 35%;
+  border-radius: 15%;
   border: 0px;
   margin-bottom: 5px;
 }
