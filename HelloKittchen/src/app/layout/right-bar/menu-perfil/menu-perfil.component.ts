@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
 import {RouterModule} from '@angular/router';
+import { ImagesPefilService } from '../../../additional/images.pefil.service';
+import { Usuario } from '../../../models/usuario.model';
 @Component({
   selector: 'app-menu-perfil',
   standalone: true,
@@ -14,13 +14,14 @@ import {RouterModule} from '@angular/router';
   styleUrl: './menu-perfil.component.scss'
 })
 export class MenuPerfilComponent {
-  user: { id: string; name: string; email: string } | null = null;
+  user?: Usuario;
   private http = inject(HttpClient); // Injeta o HttpClient
   // Dados para Login e Cadastro
   loginData = { email: '', password: '' };
   registerData = { name: '', email: '', password: '' };
   isAuthenticated = false;
   userName = ''; // Armazena o nome do usuário logado
+  public readonly imageService = inject(ImagesPefilService);
 
   constructor(private authService: AuthService) {
   }
@@ -29,7 +30,7 @@ export class MenuPerfilComponent {
   ngOnInit() {
     console.log('localStorage (authUser):', localStorage.getItem(this.authService.userKey));
     this.user = this.authService.getUser();
-  
+
     if (this.user) {
       this.userName = this.user.name;
       this.isAuthenticated = true;
@@ -38,11 +39,11 @@ export class MenuPerfilComponent {
       console.warn('Nenhum usuário logado.');
       this.isAuthenticated = false;
     }
-  }  
+  }
 
   logout() {
     this.authService.logout();
-    this.user = null;
+    this.user = undefined;
     this.isAuthenticated = false;
     alert('Logout realizado com sucesso!');
     window.location.reload();
@@ -50,24 +51,24 @@ export class MenuPerfilComponent {
 
   login(event: Event) {
     event.preventDefault();
-  
+
     const { email, password } = this.loginData;
-  
+
     // Primeira requisição: Obter o token
     this.http.post('http://localhost:3000/auth/login', { email, password }).subscribe({
       next: (response: any) => {
         const token = response.access_token;
         const tokenType = response.token_type;
-  
+
         if (!token || !tokenType) {
           console.error('Resposta de login incompleta:', response);
           alert('Erro ao fazer login. Token não recebido.');
           return;
         }
-  
+
         // Salve o token no AuthService
         this.authService.saveToken(token);
-  
+
         // Segunda requisição: Obter os dados do usuário
         this.http.get('http://localhost:3000/auth/me', {
           headers: { Authorization: `${tokenType} ${token}` },
@@ -78,17 +79,17 @@ export class MenuPerfilComponent {
               alert('Erro ao buscar os dados do usuário.');
               return;
             }
-  
+
             // Salve o usuário no AuthService
             this.authService.login(token, user);
-  
+
             // Atualize a interface
             this.user = user;
             this.isAuthenticated = true;
-  
+
             // Feche o modal de login
             this.closeModal();
-            
+
             alert(`Login realizado com sucesso! Bem-vindo(a), ${user.name}`);
             window.location.reload();
           },
@@ -104,7 +105,7 @@ export class MenuPerfilComponent {
       },
     });
   }
-  
+
   closeModal(): void {
     const modalElement = document.getElementById('userModal');
     if (modalElement) {
@@ -117,7 +118,7 @@ export class MenuPerfilComponent {
         backdrop.remove();
       }
     }
-  }  
+  }
 
   register(event: Event) {
     event.preventDefault(); // Evita recarregar a página ao submeter o formulário

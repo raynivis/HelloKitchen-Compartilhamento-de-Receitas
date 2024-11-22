@@ -7,6 +7,5 @@ export interface LivroReceita{
   id: number;
   dateCreated: string;  //em $date-time
   lastUpdated: string; //em $date-time
-
 }
 
