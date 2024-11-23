@@ -11,7 +11,7 @@
   <div class="d-flex flex-row inside-post">
 
     <div style="padding-right: 3px;">
-      <img [src]="imageService.getPerfilAleatorio(livro.user.id)" alt="imagem de perfil"> <!--quero usar ts nesse alt-->
+      <img [src]="imageService.getPerfilAleatorio(livro.user.email.length)" alt="imagem de perfil"> <!--quero usar ts nesse alt-->
     </div>
     <div class="p-2 flex-fill text-post text-center book shadow-sm bg-body-tertiary">
       <div class="d-flex justify-content-start align-items-end">
@@ -20,14 +20,14 @@
           <div class="inside-post" style="border-radius: 45%;">
             <p style="
                font-family: 'PixelSix00', sans-serif; color: #f4b9cf; font-size: 11px; height: 1px;">
-              ray marques
+              {{livro.user.name}}
             </p>
           </div>
         </div>
 
       </div>
       <div>
-        <h6 style="color: #f4b9cf; background-color: #fdfeff;">"nome do livro" book's</h6>
+        <h6 style="color: #f4b9cf; background-color: #fdfeff;">{{livro.name}} book's</h6>
         <!--Avaliação (mudar depois)-->
         <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#f8d92a">
           <path

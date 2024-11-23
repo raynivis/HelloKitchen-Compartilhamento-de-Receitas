@@ -1,8 +1,10 @@
 import { ImagesPefilService } from '../../../additional/images.pefil.service';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ContentWcComponent } from "./content-wc/content-wc.component";
+import { ReceitaService } from '../../../services/receita.service';
+import { Receita } from '../../../models/receita.model';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +13,16 @@ import { ContentWcComponent } from "./content-wc/content-wc.component";
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
-  user: { id: string; name: string; email: string } | null = null;
-  private http = inject(HttpClient); // Injeta o HttpClient
-  userName = ''; // Armazena o nome do usuário logado
+export class HomeComponent implements OnInit{
+  public readonly imageService = inject(ImagesPefilService);
+  private readonly receitasService = inject(ReceitaService);
+  receitas: Receita[] = [];
 
-  constructor(public imageService: ImagesPefilService) {
+  ngOnInit(): void {
+    this.receitasService.list().subscribe((dado) => {
+      this.receitas = dado.items;
+    });
   }
+
+
 }

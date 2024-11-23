@@ -1,7 +1,7 @@
 <div class="d-flex flex-column mb-3 text-card">
-  @if (isAuthenticated) {
+  @if (user) {
   <!-- Exibição para usuário logado -->
-  <h6>Bem-vindo de volta, {{ userName }}!</h6>
+  <h6>Bem-vindo de volta, {{ user.name }}!</h6>
   <p>Estamos felizes em te ver de volta. Confira nossas receitas mais recentes!</p>
   }
   @else {

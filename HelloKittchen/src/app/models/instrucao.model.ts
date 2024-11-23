@@ -1,11 +1,9 @@
-import { Livro } from "./livro.model";
 import { Receita } from "./receita.model";
 
-export interface LivroReceita{
-  book: Livro;
+export interface Instrucao{
   recipe: Receita;
-  notes: string;
-  id: number;
+  step: string;
+  id: number
   dateCreated: string;  //em $date-time
   lastUpdated: string; //em $date-time
 }

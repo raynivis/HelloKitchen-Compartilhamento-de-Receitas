@@ -17,10 +17,9 @@ export class BooksComponent implements OnInit{
   private readonly livrosService = inject(LivroService);
   livros: Livro[] = [];
 
-
   ngOnInit(): void {
     this.livrosService.list().subscribe((dado) => {
-      this.livros = dado;
+      this.livros = dado.items;
     });
   }
 
