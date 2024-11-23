@@ -1,75 +1,90 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../additional/environment.backend';
+import { StorageService } from './storage.service';
+import { LoginData } from '../models/login.model';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private readonly baseAPI = environment.URL_BASE + '/auth';
+  private readonly http = inject(HttpClient);
+  private readonly storageService = inject(StorageService);
+  private readonly router = inject(Router);
 
-  checkAuthentication(): void {
-    if (this.isAuthenticated()) {
-      console.log('Usuário autenticado.');
-    }
+  private currentUserSubject!: BehaviorSubject<Usuario | null>;
+  public atualUser!: Observable<Usuario | null>;
+
+  constructor() {
+    this.currentUserSubject = new BehaviorSubject<Usuario | null>(
+      this.getUserStorage(false)
+    );
+    this.atualUser = this.currentUserSubject.asObservable();
+  }
+  login(email: string, password: string): Observable<Usuario | null> {
+    return this.http
+      .post<LoginData>(this.baseAPI + '/login', {
+        email,
+        password,
+      })
+      .pipe(
+        switchMap((resp) => {
+          if (resp.access_token) {
+            const headers = {
+              Authorization: `${resp.token_type} ${resp.access_token}`,
+            };
+
+            return this.http.get<Usuario>(this.baseAPI + '/me', { headers }).pipe(
+              map((user) => {
+                user = { ...user, ...resp };
+                this.storageService.set('user', user);
+                this.currentUserSubject.next(user);
+                return user;
+              })
+            );
+          } else {
+            return of(null);
+          }
+        })
+      );
   }
 
-  private tokenKey = 'authToken';
-  public userKey = 'authUser';
+  logout(): void {
+    this.storageService.remove('user');
+    this.currentUserSubject.next(null);
+  }
 
   saveToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+    this.storageService.set('user', token);
   }
 
-  // Salvar token e informações do usuário
-  login(token: string,  usuario: Observable<Usuario>) {
-    if (!token || !usuario) {
-      console.error('Tentativa de login com dados inválidos:', { token, usuario });
-      return;
-    }
-
-    console.log('Salvando token e usuário no localStorage:', { token, usuario });
-    localStorage.setItem(this.tokenKey, token);
-    localStorage.setItem(this.userKey, JSON.stringify(usuario));
+  getUser(): Usuario | null {
+    return this.currentUserSubject.value;
   }
 
+  isLoggedIn(): boolean {
+    const user = this.getUserStorage(false);
 
-
-  // Obter o token
-  getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return !!(user && user.access_token !== null);
   }
 
-  // Obter informações do usuário logado
-  getUser(): Usuario | undefined {
-    const user = localStorage.getItem(this.userKey);
-
-    if (!user) {
-      console.warn('Chave authUser não encontrada no localStorage.');
-      return undefined;
-    }
+  private getUserStorage(isRediret: boolean = true): Usuario | null {
+    let user: Usuario | null = null;
 
     try {
-      return JSON.parse(user); // Faz o parse do JSON
+      user = this.storageService.get('user');
     } catch (error) {
-      console.error('Erro ao parsear o JSON do usuário:', error);
-      return undefined; // Retorna null em caso de erro no JSON
+      this.logout();
+      if (isRediret) {
+        this.router.navigate(['/login']);
+      }
     }
-  }
 
-  getUserName(): string | null {
-    const user = localStorage.getItem(this.userKey);
-    return user ? JSON.parse(user).name : null;
-  }
-
-  // Verificar se o usuário está autenticado
-  isAuthenticated(): boolean {
-    return !!this.getToken();
-  }
-
-  // Fazer logout e limpar informações
-  logout() {
-    localStorage.removeItem(this.tokenKey);
-    localStorage.removeItem(this.userKey);
+    return user;
   }
 
 }
+
