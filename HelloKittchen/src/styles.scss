@@ -76,6 +76,23 @@ body {
   margin-bottom: 5px;
 }
 
+
 .botao-menu:hover{
   background-image: url('/assets/xadrezrosa.jpg');
+}
+
+.btn-CRUD{
+  background-image: url('/assets/xadrezazul2.jpg');
+  background-repeat: repeat;
+  border-radius: 15%;
+}
+
+.btn-CRUD:hover{
+  color: #fdb4d7;
+}
+
+
+.form-modal{
+  background-image: url('/assets/xadrezazul2.jpg');
+  border-radius: 8px;      /* Bordas arredondadas (opcional) */
 }

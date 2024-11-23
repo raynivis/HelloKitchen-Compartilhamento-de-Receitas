@@ -60,13 +60,13 @@ export class MenuPerfilComponent {
       },
       error: (resp) => {
         this.errorMessage = resp.error.message;
+        alert('Opa, parece que você errou algum dado na hora de digitar!');
+        window.location.reload();
       },
     });
 
     // Feche o modal de login
     this.closeModal();
-
-
   }
 
   closeModal(): void {

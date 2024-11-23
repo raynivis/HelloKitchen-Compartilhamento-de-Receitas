@@ -16,6 +16,16 @@ export class LivroService {
     return this.http.get<Pagination<Livro>>(this.API);
   }
 
+  addBook(livro: {name:string}): Observable<{name:string}>{
+    return this.http.post<{name:string}>(this.API, livro);
+  }
 
+  updateBook(id: number, livro: {name:string}): Observable<{name:string}>{
+    return this.http.patch<{name:string}>(`${this.API}/${id}`, livro);
+  }
+
+  deleteBook(id: number): Observable<Livro>{
+    return this.http.delete<Livro>(`${this.API}/${id}`);
+  }
 
 }
