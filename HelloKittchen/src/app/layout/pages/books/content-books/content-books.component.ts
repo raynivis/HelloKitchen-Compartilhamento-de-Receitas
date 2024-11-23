@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { LivroService } from '../../../../services/livro.service';
 
 @Component({
   selector: 'app-content-books',
@@ -8,5 +9,24 @@ import { Component } from '@angular/core';
   styleUrl: './content-books.component.scss'
 })
 export class ContentBooksComponent {
+  @ViewChild('livroModal') modalElement!: ElementRef;
+  @ViewChild('InputLivro') InputLivro!: ElementRef<HTMLInputElement>;
+  private readonly livrosService = inject(LivroService);
+  livro: { name: string } = { name: '' };
 
+  openModal() {
+    if (this.modalElement) {
+      const modal = new (window as any).bootstrap.Modal(this.modalElement.nativeElement);
+      modal.show();
+    } else {
+      console.error('Modal element não encontrado');
+    }
+  }
+
+  enviarLivro(){
+    this.livro.name = this.InputLivro.nativeElement.value;
+    this.livrosService.addBook(this.livro).subscribe();
+    alert('Livro cadastrado! com sucesso');
+    window.location.reload();
+  }
 }

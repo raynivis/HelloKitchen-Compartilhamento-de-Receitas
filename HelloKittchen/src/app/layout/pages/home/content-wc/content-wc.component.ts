@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../../services/auth.service';
+import { Usuario } from '../../../../models/usuario.model';
 
 @Component({
   selector: 'app-content-wc',
@@ -10,20 +11,14 @@ import { AuthService } from '../../../../services/auth.service';
   styleUrl: './content-wc.component.scss'
 })
 export class ContentWcComponent {
-  userName: string | null = '';
-  isAuthenticated = false;
-  constructor(private authService: AuthService) {
-    this.checkAuthentication();
-  }
+  user: Usuario | null = null;
+  private readonly authService = inject(AuthService);
 
   ngOnInit() {
-    this.userName = this.authService.getUserName();
+    this.authService.atualUser.subscribe((user) => {
+      this.user = user;
+    });
   }
 
-  checkAuthentication(): void {
-    this.isAuthenticated = this.authService.isAuthenticated();
-    if (this.isAuthenticated) {
-      this.userName =  this.authService.getUserName();
-    }
-  }
+
 }

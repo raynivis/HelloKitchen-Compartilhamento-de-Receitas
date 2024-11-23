@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ImagesPefilService } from '../../../../additional/images.pefil.service';
 
 @Component({
@@ -9,6 +9,5 @@ import { ImagesPefilService } from '../../../../additional/images.pefil.service'
   styleUrl: './books-page.component.scss'
 })
 export class BooksPageComponent {
-  constructor(public imageService: ImagesPefilService){
-  }
+  public readonly imageService = inject(ImagesPefilService);
 }

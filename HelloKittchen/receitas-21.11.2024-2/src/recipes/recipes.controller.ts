@@ -1,3 +1,4 @@
+import { IsPublic } from './../shared/decorators/is-public.decorator';
 import {
   Controller,
   Get,
@@ -52,6 +53,7 @@ export class RecipesController {
     return this.recipesService.create(createRecipeDto);
   }
 
+  @IsPublic()
   @ApiPaginatedResponse(Recipe)
   @Get()
   findAll(@Query() query: QueryListRecipeDto) {
@@ -64,6 +66,7 @@ export class RecipesController {
     return this.recipesService.findAll(query, user);
   }
 
+  @IsPublic()
   @ApiOkResponse({ type: Recipe })
   @Get(':id')
   findOne(@CurrentUser() user: User, @Param('id', ParseIntPipe) id: number) {

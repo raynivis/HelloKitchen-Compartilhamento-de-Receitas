@@ -1,12 +1,48 @@
 <div class="d-flex flex-column mb-3 text-card d-flex align-items-center">
   <p>૮₍´˶• . • ⑅ ₎ა</p>
-  <p class="texto-titulo" style="font-size: 15px; ">Está atrás de um baquete? <br/>
-    Dê uma olhada nos livros de receitas dos nossos usuários
+  <p class="texto-titulo" style="font-size: 15px; ">Faça seu proprio livro de receita para guardar com muito amor <br />
   </p>
 
   <p>⎛⎝ ≽ > ⩊ < ≼ ⎠⎞</p>
-  <svg width="100" height="80">
-    <image width="100" height="80" href="assets/gifs/hello-livros.gif" ></image>
-  </svg>
+      <svg width="100" height="80">
+        <image width="100" height="80" href="assets/gifs/hello-livros.gif"></image>
+      </svg>
 
-  </div>
+      <div class="p-2">
+      <button class="btn btn-CRUD texto-titulo" type="button" (click)="openModal()">
+        <svg width="35" height="35">
+          <image width="35" height="35" href="assets/gifs/kuromi-books.gif"></image>
+        </svg>
+        Criar novo Livro!
+      </button>
+      </div>
+      <!--Modal-->
+      <div class="modal fade" id="livroModal" #livroModal tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content form-modal">
+            <div class="modal-header">
+
+              <div class="post" style="border-radius: 45%;">
+                <div class="inside-post" style="border-radius: 45%;">
+                  <p style="
+                     font-family: 'PixelSix00', sans-serif; color: #f4b9cf; font-size: 11px; height: 1px;">
+                    Cadastro de livro
+                  </p>
+                </div>
+              </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="formGroupInput" class="form-label">Nome do Livro</label>
+                <input #InputLivro type="text" class="form-control" id="formGroupInput">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button (click)="enviarLivro()" type="button" class="btn botao-menu d-flex align-items-center">criar!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

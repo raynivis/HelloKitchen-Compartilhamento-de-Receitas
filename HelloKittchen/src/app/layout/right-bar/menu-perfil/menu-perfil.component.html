@@ -1,8 +1,8 @@
 <div class="perfil-menu d-flex justify-content-center row d-flex align-items-center text-center">
   @if (isAuthenticated) {
-  <img class="foto" src="assets/icons/mymelody.png" alt="">
+  <img class="foto" [src]="imageService.getPerfilAleatorio(user?.email?.length!)" alt="foto de perfil do usuário">
   <p class="nome">
-    {{ userName }}
+    {{ user?.name }}
   </p>
   <P>rating:</P>
   <div class="d-flex align-items-center text-center">
@@ -31,7 +31,7 @@
     <image width="88" height="60" href="assets/gifs/gifDireita.gif"></image>
   </svg>
   <button class="botao-menu" [routerLink]="'/books'">
-    <p class="text-sans" style=" color: #f1576c;"><img src="assets/auxiliares/cereja.png" width="14" height="12" 
+    <p class="text-sans" style=" color: #f1576c;"><img src="assets/auxiliares/cereja.png" width="14" height="12"
         alt=""> books </p>
   </button>
   <button class="botao-menu">
