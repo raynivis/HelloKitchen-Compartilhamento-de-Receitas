@@ -14,6 +14,7 @@ export class ContentBooksComponent {
   private readonly livrosService = inject(LivroService);
   livro: { name: string } = { name: '' };
 
+
   openModal() {
     if (this.modalElement) {
       const modal = new (window as any).bootstrap.Modal(this.modalElement.nativeElement);
@@ -23,10 +24,15 @@ export class ContentBooksComponent {
     }
   }
 
-  enviarLivro(){
+  enviarLivro() {
+    if (this.InputLivro.nativeElement.value.length < 4) {
+      alert('Erro: O nome do livro de ter mais de 3 letras!!');
+      return;
+    }
     this.livro.name = this.InputLivro.nativeElement.value;
     this.livrosService.addBook(this.livro).subscribe();
-    alert('Livro cadastrado! com sucesso');
+    alert('Livro cadastrado com sucesso!');
+    this.livrosService.list().subscribe();
     window.location.reload();
   }
 }

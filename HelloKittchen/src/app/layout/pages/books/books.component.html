@@ -55,20 +55,20 @@
 
       <div class="d-grid gap-2 d-md-flex justify-content-between">
         <div class="d-flex align-items-end" style="padding: 0;">
-          <button class="opp-button card shadow">
+          <button class="opp-button card shadow" (click)="openModalDelete(livro.id)">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#cd2454">
               <path
                 d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
             </svg>
           </button>
-          <button class="opp-button card shadow" (click)="openModal(livro.id)">
+          <button class="opp-button card shadow" (click)="openModalEdit(livro.id)">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#76c56c">
               <path
                 d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
             </svg>
           </button>
         </div>
-        <button class="btn-page" [routerLink]="'/book'">
+        <button class="btn-page" [routerLink]="['/book', livro.id]">
           <svg width="40" height="40">
             <image href="assets/auxiliares/hello-ler.png" width="40" height="40">
             </image>
@@ -81,33 +81,62 @@
 </article>
 }
 
-<!--Modal-->
-<div class="modal fade text-card" #livroEditarModal tabindex="-1"
-aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-  <div class="modal-content form-modal">
-    <div class="modal-header">
-
-      <div class="post" style="border-radius: 45%;">
-        <div class="inside-post" style="border-radius: 45%;">
-          <p style="
+<!--Modal Edits-->
+<div class="modal fade text-card" #livroEditarModal tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content form-modal">
+      <div class="modal-header">
+        <div class="post" style="border-radius: 45%;">
+          <div class="inside-post" style="border-radius: 45%;">
+            <p style="
      font-family: 'PixelSix00', sans-serif; color: #f4b9cf; font-size: 11px; height: 1px;">
-            Editar Nome do Livro
-          </p>
+              Editar Nome do Livro
+            </p>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 text-center">
+          <label for="formedit" class="form-label">Novo Nome</label>
+          <input #InputLivro type="text" class="form-control" id="formedit">
         </div>
       </div>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-      <div class="mb-3 text-center">
-        <label for="formGroupInput" class="form-label">Novo Nome</label>
-        <input #InputLivro type="text" class="form-control" id="formGroupInput">
+      <div class="modal-footer">
+        <button (click)="editarLivro()" type="button" class="btn botao-menu d-flex align-items-center">salvar!</button>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button (click)="editarLivro()" type="button"
-        class="btn botao-menu d-flex align-items-center">salvar!</button>
     </div>
   </div>
 </div>
+
+<!--Modal delete-->
+<div class="modal fade text-card" #livroExcluirModal tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content form-modal">
+      <div class="modal-header">
+        <div class="post" style="border-radius: 45%;">
+          <div class="inside-post" style="border-radius: 45%;">
+            <p style="
+     font-family: 'PixelSix00', sans-serif; color: #f4b9cf; font-size: 11px; height: 1px;">
+              Apagar Livro
+            </p>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Você realmente deseja apagar o livro?
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button (click)="excluirLivro()" type="button" class="btn d-flex align-items-center" style="max-width: 80px;
+        max-height: 20px; color: #fdfeff;
+        border-radius: 15%;background-color: #ec2335;">sim</button>
+        <button type="button" class="btn  d-flex align-items-center" data-bs-dismiss="modal" style="  max-width: 80px;
+        max-height: 20px; color: #fdfeff;
+        border-radius: 15%; background-color: #50e3c2;">não</button>
+      </div>
+    </div>
+  </div>
 </div>

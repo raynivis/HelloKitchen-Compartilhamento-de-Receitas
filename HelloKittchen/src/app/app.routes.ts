@@ -13,6 +13,6 @@ export const routes: Routes = [
   {path: 'cooks', component: CooksComponent},
   {path: 'categoria/:id', component: CooksPageComponent}, //vai ter o id da categoria
   {path: 'books', component: BooksComponent},
-  {path: 'book', component: BooksPageComponent}, //vai ter o id do livro
+  {path: 'book/:id', component: BooksPageComponent}, //vai ter o id do livro
   {path: 'about', component: AboutComponent},
 ];
