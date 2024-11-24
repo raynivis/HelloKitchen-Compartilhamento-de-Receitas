@@ -102,7 +102,7 @@ export class RecipesService {
   }
 
   async removeIngredient(recipeId: number, id: number) {
-    this.checkCanUpdate(recipeId);
+    await this.checkCanUpdate(recipeId);
     const record = await this.repositoryIngredient.delete({
       id,
       recipe: { id: recipeId },
@@ -125,7 +125,7 @@ export class RecipesService {
   }
 
   async removeInstruction(recipeId: number, id: number) {
-    this.checkCanUpdate(recipeId);
+    await this.checkCanUpdate(recipeId);
     const record = await this.repositoryInstruction.delete({
       id,
       recipe: { id: recipeId },

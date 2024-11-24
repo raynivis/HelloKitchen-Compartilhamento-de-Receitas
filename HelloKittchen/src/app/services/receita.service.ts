@@ -4,6 +4,7 @@ import { Pagination } from 'nestjs-typeorm-paginate';
 import { Observable } from 'rxjs';
 import { environment } from '../additional/environment.backend';
 import { Receita } from '../models/receita.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +15,30 @@ export class ReceitaService {
 
   list(): Observable<Pagination<Receita>> {
     return this.http.get<Pagination<Receita>>(this.API);
+  }
+
+  getAllRecipes(): Observable<Receita[]> {
+    return this.http.get<{ items: Receita[]; meta: any }>(this.API).pipe(
+      map((response) => {
+        console.log('Resposta bruta da API:', response); // Adicionado para depuração
+        return response.items || [];
+      })
+    );
+  }
+  
+
+  getRecipesByCategory(
+    categoryId: number,
+    sortBy: string = 'score'
+  ): Observable<Receita[]> {
+    const url = `${this.API}?categoryId=${categoryId}&sortBy=${sortBy}`;
+    return this.http.get<{ data: Receita[] }>(url).pipe(
+      map((response) => response.data || []) // Extraímos o array de receitas
+    );
+  }
+
+  // Criar receita
+  createRecipe(Receita: { name: string; description: string; ingredients: string[] }): Observable<any> {
+    return this.http.post<any>(this.API, Receita);
   }
 }
