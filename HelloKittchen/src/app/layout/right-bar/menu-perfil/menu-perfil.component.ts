@@ -60,6 +60,7 @@ export class MenuPerfilComponent {
       },
       error: (resp) => {
         this.errorMessage = resp.error.message;
+        console.log(resp.error.message);
         alert('Opa, parece que você errou algum dado na hora de digitar!');
         window.location.reload();
       },
