@@ -96,3 +96,14 @@ body {
   background-image: url('/assets/xadrezazul2.jpg');
   border-radius: 8px;      /* Bordas arredondadas (opcional) */
 }
+
+.stars {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 4px;
+}
+
+.stars li {
+  display: inline-block;
+}

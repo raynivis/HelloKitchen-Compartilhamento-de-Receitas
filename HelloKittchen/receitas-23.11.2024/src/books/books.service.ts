@@ -1,12 +1,8 @@
 import { RecordNotFoundException } from '@exceptions';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {
-  IPaginationOptions,
-  paginate,
-  Pagination,
-} from 'nestjs-typeorm-paginate';
-import { FindManyOptions, FindOptionsWhere, ILike, Repository } from 'typeorm';
+import { paginate, Pagination } from 'nestjs-typeorm-paginate';
+import { FindOptionsWhere, ILike, Repository } from 'typeorm';
 
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
@@ -46,15 +42,14 @@ export class BooksService {
     id: number,
     updateBookDto: UpdateBookDto,
   ): Promise<Book> {
-    this.findOne(user, id);
+    await this.findOne(user, id);
     await this.repository.update(id, updateBookDto);
     return this.findOne(user, id);
   }
 
-  async remove(user: User, id: number): Promise<boolean> {
-    this.findOne(user, id);
+  async remove(user: User, id: number) {
+    await this.findOne(user, id);
     const record = await this.repository.delete(id);
     if (!record?.affected) throw new RecordNotFoundException();
-    return true;
   }
 }

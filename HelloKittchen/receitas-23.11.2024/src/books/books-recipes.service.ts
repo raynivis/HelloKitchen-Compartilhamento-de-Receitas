@@ -24,7 +24,7 @@ export class BooksRecipesService {
     bookId: number,
     createBookRecipeDto: CreateBookRecipeDto,
   ): Promise<BookRecipe> {
-    this.booksService.findOne(user, bookId);
+    await this.booksService.findOne(user, bookId);
     const record = this.repository.create({
       ...createBookRecipeDto,
       book: { id: bookId },
@@ -62,15 +62,14 @@ export class BooksRecipesService {
     id: number,
     updateBookRecipeDto: UpdateBookRecipeDto,
   ): Promise<BookRecipe> {
-    this.booksService.findOne(user, bookId);
+    await this.booksService.findOne(user, bookId);
     await this.repository.update(id, updateBookRecipeDto);
     return this.findOne(user, bookId, id);
   }
 
-  async remove(user: User, bookId: number, id: number): Promise<boolean> {
-    this.booksService.findOne(user, bookId);
+  async remove(user: User, bookId: number, id: number) {
+    await this.booksService.findOne(user, bookId);
     const record = await this.repository.delete(id);
     if (!record?.affected) throw new RecordNotFoundException();
-    return true;
   }
 }
