@@ -1,0 +1,113 @@
+.receita-detalhe {
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .receita-imagem {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .avaliacao {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+  }
+  
+  .pagina-avaliacao {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+  }
+  
+  .titulo {
+    color: #70564e;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .avaliacoes, .nova-avaliacao, .comentarios {
+    margin-bottom: 30px;
+  }
+  
+  .avaliacao-item {
+    background-size: cover;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .avaliacao-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .stars {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .stars li {
+    margin-right: 5px;
+  }
+  
+  .avaliacao-comment {
+    margin-top: 10px;
+    font-style: italic;
+    color: #333;
+  }
+  
+  .nova-avaliacao h3 {
+    text-align: center;
+    color: #70564e;
+  }
+  
+  .avaliacao-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-input, .form-textarea {
+    border: 2px solid #70564e;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1em;
+    background-color: #fef7a6;
+    color: #70564e;
+  }
+  
+  .form-input:focus, .form-textarea:focus {
+    outline: none;
+    border-color: #f8d92a;
+  }
+  
+  .btn-enviar {
+    align-self: flex-end;
+    padding: 10px 20px;
+    background-color: #70564e;
+    color: #fef7a6;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  .btn-enviar:hover {
+    background-color: #f8d92a;
+    color: #70564e;
+  }
+  
+  .comentario-item {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fef7a6;
+  }
+  

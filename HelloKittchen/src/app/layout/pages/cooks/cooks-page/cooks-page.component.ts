@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ImagesPerfilService } from '../../../../additional/images.perfil.service';
 import { ReceitaService } from '../../../../services/receita.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Receita } from '../../../../models/receita.model';
@@ -22,6 +22,7 @@ export class CooksPageComponent implements OnInit{
 
   private readonly route = inject(ActivatedRoute);
   private readonly receitaService = inject(ReceitaService);
+  private readonly router = inject(Router);
   id!: number; //id da categoria
   receitas: Receita[] = []; // Lista de receitas
   isLoading = true; // Indica carregamento
@@ -83,5 +84,8 @@ export class CooksPageComponent implements OnInit{
       return 0;
     });
   }
-
+  
+  abrirReceita(id: number): void {
+    this.router.navigate(['/cooks', id]);
+  }
 }
