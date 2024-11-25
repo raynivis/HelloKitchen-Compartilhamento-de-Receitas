@@ -8,6 +8,7 @@ import { BooksPageComponent } from './layout/pages/books/books-page/books-page.c
 import { AboutComponent } from './layout/pages/about/about.component';
 import { CooksDetailsComponent} from './layout/pages/cooks/cooks-details/cooks-details.component'
 import { CookPostComponent } from './layout/pages/cooks/cook-post/cook-post.component';
+import { MyrecipesComponent } from './layout/pages/myrecipes/myrecipes.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -19,4 +20,5 @@ export const routes: Routes = [
   {path: 'books', component: BooksComponent},
   {path: 'book/:id', component: BooksPageComponent}, //vai ter o id do livro
   {path: 'about', component: AboutComponent},
+  {path: 'my-recipes', component: MyrecipesComponent}
 ];

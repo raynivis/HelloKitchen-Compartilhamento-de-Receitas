@@ -70,7 +70,7 @@ export class AuthService {
   getUserById(userId: number): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.API}/users/${userId}`);
   }
-  
+
 
   isLoggedIn(): boolean {
     const user = this.getUserStorage(false);

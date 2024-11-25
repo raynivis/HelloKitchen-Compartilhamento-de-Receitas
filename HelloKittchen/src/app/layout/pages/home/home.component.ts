@@ -13,7 +13,6 @@ import { PostRecipeComponent } from "../../items/post-recipe/post-recipe.compone
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit{
-  public readonly imageService = inject(ImagesPerfilService);
   private readonly receitasService = inject(ReceitaService);
   receitas: Receita[] = [];
 
