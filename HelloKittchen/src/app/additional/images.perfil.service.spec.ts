@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ImagesPefilService } from '../additional/images.pefil.service';
+import { ImagesPerfilService } from './images.perfil.service';
 
 describe('ImagesPefilService', () => {
-  let service: ImagesPefilService;
+  let service: ImagesPerfilService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ImagesPefilService);
+    service = TestBed.inject(ImagesPerfilService);
   });
 
   it('should be created', () => {

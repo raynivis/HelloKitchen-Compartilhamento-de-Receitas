@@ -1,19 +1,20 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { ImagesPefilService } from '../../../../additional/images.pefil.service';
+import { ImagesPerfilService } from '../../../../additional/images.perfil.service';
 import { ActivatedRoute } from '@angular/router';
 import { LivroReceitasService } from '../../../../services/livro.receitas.service';
 import { LivroReceita } from '../../../../models/livroReceita.model';
 import { BooksPageContentComponent } from "./books-page-content/books-page-content.component";
+import { StarsComponent } from "../../../items/stars/stars.component";
 
 @Component({
   selector: 'app-books-page',
   standalone: true,
-  imports: [BooksPageContentComponent],
+  imports: [BooksPageContentComponent, StarsComponent],
   templateUrl: './books-page.component.html',
   styleUrl: './books-page.component.scss'
 })
 export class BooksPageComponent implements OnInit{
-  public readonly imageService = inject(ImagesPefilService);
+  public readonly imageService = inject(ImagesPerfilService);
   private readonly bookRecipeService = inject(LivroReceitasService);
   private readonly route = inject(ActivatedRoute);
   receitaLivros: LivroReceita[] = [];
@@ -53,6 +54,11 @@ export class BooksPageComponent implements OnInit{
   }
 
   editarLivroReceita(){
+    if(this.Inputnotes.nativeElement.value == ''){
+      alert('Erro: Deixe alguma anotação!!!')
+      return;
+    }
+
     this.bookRecipeService.getRecipe(this.id, this.livroReceitaIdEdit).subscribe(dado => {
       this.livroReceitaEdit = dado;
       this.livroReceitaEdit.notes = this.Inputnotes.nativeElement.value;

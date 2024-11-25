@@ -11,6 +11,7 @@ import { LoginData } from '../models/login.model';
 })
 export class AuthService {
   private readonly baseAPI = environment.URL_BASE + '/auth';
+  private readonly baseAPIUser = environment.URL_BASE + '/users';
   private readonly http = inject(HttpClient);
   private readonly storageService = inject(StorageService);
   private readonly router = inject(Router);
@@ -82,8 +83,15 @@ export class AuthService {
         this.router.navigate(['/login']);
       }
     }
-
     return user;
+  }
+
+  updateUser(id: number, user: Usuario): Observable<Usuario>{
+    return this.http.patch<Usuario>(`${this.baseAPIUser}/${id}`, user);
+  }
+
+  getUsers(id: number): Observable<Usuario>{
+    return this.http.get<Usuario>(`${this.baseAPIUser}/${id}`);
   }
 
 }

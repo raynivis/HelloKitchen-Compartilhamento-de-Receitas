@@ -1,6 +1,6 @@
 <div class="perfil-menu d-flex justify-content-center row d-flex align-items-center text-center">
   @if (isAuthenticated) {
-  <img class="foto" [src]="imageService.getPerfilAleatorio(user?.email?.length!)" alt="foto de perfil do usuário">
+  <img (click)="openModalEdit()" class="foto" [src]="imageService.getPerfilAleatorio(user?.email?.length!)" alt="foto de perfil do usuário">
   <p class="nome">
     {{ user?.name }}
   </p>
@@ -41,7 +41,7 @@
     <p>sign out</p>
   </button>
   } @else {
-    <img class="foto" src="assets/icons/logout.png" alt="">
+    <img class="fotoSem" src="assets/icons/logout.png" alt="">
     <button type="button" class="botao-menu" data-bs-toggle="modal" data-bs-target="#userModal">
       <p> login </p>
     </button>
@@ -123,4 +123,36 @@
     </div>
   </div>
 </div>
+
+@if (isAuthenticated) {
+<!--Modal Edits-->
+<div class="modal fade text-card" #usuarioEditarModal tabindex="-1" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content form-modal">
+    <div class="modal-header">
+      <div class="post" style="border-radius: 45%;">
+        <div class="inside-post" style="border-radius: 45%;">
+          <p style="
+   font-family: 'PixelSix00', sans-serif; color: #f4b9cf; font-size: 11px; height: 1px;">
+            Editar Nome de usuario
+          </p>
+        </div>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <img class="border border-2" [src]="imageService.getPerfilAleatorio(user?.email?.length!)" alt="foto de perfil do usuário">
+      <div class="mb-3 text-center">
+        <label for="formedit" class="form-label">Novo Nome de Usuario</label>
+        <input #InputNome type="text" class="form-control" id="formedit">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button (click)="salvarUsuario()" type="button" class="btn botao-menu d-flex align-items-center">salvar!</button>
+    </div>
+  </div>
+</div>
+</div>
+}
 

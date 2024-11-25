@@ -1,20 +1,19 @@
-import { ImagesPefilService } from '../../../additional/images.pefil.service';
-import { HttpClient } from '@angular/common/http';
+import { ImagesPerfilService } from '../../../additional/images.perfil.service';
 import { Component, inject, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
 import { ContentWcComponent } from "./content-wc/content-wc.component";
 import { ReceitaService } from '../../../services/receita.service';
 import { Receita } from '../../../models/receita.model';
+import { PostRecipeComponent } from "../../items/post-recipe/post-recipe.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ContentWcComponent],
+  imports: [ContentWcComponent, PostRecipeComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit{
-  public readonly imageService = inject(ImagesPefilService);
+  public readonly imageService = inject(ImagesPerfilService);
   private readonly receitasService = inject(ReceitaService);
   receitas: Receita[] = [];
 

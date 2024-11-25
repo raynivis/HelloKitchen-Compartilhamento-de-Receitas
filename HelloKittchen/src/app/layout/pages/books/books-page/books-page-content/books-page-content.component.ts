@@ -40,7 +40,11 @@ export class BooksPageContentComponent implements OnInit{
 
   adicionarLivroReceita(){
     if(this.receitaId.nativeElement.value == "-1"){
-      alert('Seleciona uma receita!! está opção não é válida!')
+      alert('Erro: Seleciona uma receita!! está opção não é válida!')
+      return;
+    }
+    if(this.Inputnotes.nativeElement.value == ''){
+      alert('Erro: Deixe alguma anotação!!!')
       return;
     }
     this.receitaNova = {recipe: {id: Number(this.receitaId.nativeElement.value)}, notes: this.Inputnotes.nativeElement.value};

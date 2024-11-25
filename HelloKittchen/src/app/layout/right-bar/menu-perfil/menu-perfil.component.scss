@@ -3,7 +3,32 @@
   height: 41px;
   margin: 2px;
   border-radius: 50%;
+  position: relative;
+  overflow: hidden;
 }
+
+.perfil-menu .fotoSem{
+  width: 60px;
+  height: 41px;
+  margin: 2px;
+  border-radius: 50%;
+}
+
+.perfil-menu .foto:hover::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.perfil-menu .foto:hover {
+  filter: brightness(0.7); /* Escurece a imagem ao passar o mouse */
+  cursor: pointer;
+}
+
 
 .perfil-menu p{
   font-size: 10px;

@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class  ImagesPefilService {
+export class  ImagesPerfilService {
 
   getPerfilAleatorio(emailtamanho :number): string {
     // Array com os URLs das imagens
