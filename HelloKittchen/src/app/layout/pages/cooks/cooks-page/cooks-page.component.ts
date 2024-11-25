@@ -1,20 +1,25 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ImagesPefilService } from '../../../../additional/images.pefil.service';
+import { ImagesPerfilService } from '../../../../additional/images.perfil.service';
 import { ReceitaService } from '../../../../services/receita.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Receita } from '../../../../models/receita.model';
 import { Categoria } from '../../../../models/categoria.model';
+import { StarsService } from '../../../../additional/stars.service';
+import { StarsComponent } from "../../../items/stars/stars.component";
+import { PostRecipeComponent } from "../../../items/post-recipe/post-recipe.component";
 @Component({
   selector: 'app-cooks-page',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule, PostRecipeComponent],
   templateUrl: './cooks-page.component.html',
   styleUrl: './cooks-page.component.scss'
 })
 export class CooksPageComponent implements OnInit{
-  public readonly imageService = inject(ImagesPefilService);
+  public readonly imageService = inject(ImagesPerfilService);
+  public readonly starsService = inject(StarsService);
+
   private readonly route = inject(ActivatedRoute);
   private readonly receitaService = inject(ReceitaService);
   id!: number; //id da categoria
@@ -56,20 +61,8 @@ export class CooksPageComponent implements OnInit{
       },
     });
   }
-  
-  generateStarArray(score: number): string[] {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      if (score >= i) {
-        stars.push('full'); // Estrela cheia
-      } else if (score > i - 1) {
-        stars.push('half'); // Estrela pela metade
-      } else {
-        stars.push('empty'); // Estrela vazia
-      }
-    }
-    return stars;
-  }
+
+
 
   onSortChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
@@ -77,7 +70,7 @@ export class CooksPageComponent implements OnInit{
     this.isLoading = true; // Indica carregamento
     this.loadRecipes(); // Recarrega as receitas
   }
-  
+
   sortRecipes(recipes: Receita[], sortBy: string): Receita[] {
     return recipes.sort((a, b) => {
       if (sortBy === 'score') {
@@ -90,5 +83,5 @@ export class CooksPageComponent implements OnInit{
       return 0;
     });
   }
-  
+
 }

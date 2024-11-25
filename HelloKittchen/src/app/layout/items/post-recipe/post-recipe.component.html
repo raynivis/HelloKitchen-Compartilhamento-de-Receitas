@@ -1,0 +1,34 @@
+<article class="col-md-12 post">
+  <div class="d-flex flex-row inside-post">
+    <div>
+      <img [src]="imageService.getPerfilAleatorio(receita.user.email.length)" alt="imagem de perfil"> <!--quero usar ts nesse alt-->
+    </div>
+    <div class="p-2 flex-fill text-post">
+      <div class="d-flex justify-content-start align-items-end">
+        <div class="post" style="border-radius: 45%;">
+          <div class="inside-post" style="border-radius: 45%;">
+            <p style="
+                font-family: 'PixelSix00', sans-serif; color: #f4b9cf; font-size: 11px; height: 1px;">
+              {{receita.user.name}}
+            </p>
+          </div>
+        </div>
+        <div [routerLink]="['/categoria', receita.category.id]" class="d-flex justify-content-end flex-fill ">
+          <p class="opp-button post-tag">{{receita.category.name}}</p>
+        </div>
+      </div>
+      <h5>{{receita.name}}</h5>
+      <p>{{receita.description}}</p>
+      <app-stars [score]="receita.score"></app-stars>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn-page">
+          <svg width="32" height="32">
+            <image href="assets/auxiliares/hello-cozinhar.png" width="32" height="32">
+            </image>
+          </svg>
+          Vamos cozinhar!!
+        </button>
+      </div>
+    </div>
+  </div>
+ </article>

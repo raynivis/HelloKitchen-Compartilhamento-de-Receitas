@@ -1,5 +1,5 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { ImagesPefilService } from '../../../additional/images.pefil.service';
+import { ImagesPerfilService } from '../../../additional/images.perfil.service';
 import { ContentBooksComponent } from "./content-books/content-books.component";
 import { RouterModule } from '@angular/router';
 import { LivroService } from '../../../services/livro.service';
@@ -14,7 +14,7 @@ import { Livro } from '../../../models/livro.model';
   styleUrl: './books.component.scss'
 })
 export class BooksComponent implements OnInit{
-  public readonly imageService = inject(ImagesPefilService);
+  public readonly imageService = inject(ImagesPerfilService);
   private readonly livrosService = inject(LivroService);
   livros: Livro[] = [];
   @ViewChild('livroEditarModal') modalElement!: ElementRef;
