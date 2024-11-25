@@ -25,7 +25,6 @@ export class ReceitaService {
       })
     );
   }
-  
 
   getRecipesByCategory(
     categoryId: number,
@@ -40,5 +39,21 @@ export class ReceitaService {
   // Criar receita
   createRecipe(Receita: { name: string; description: string; ingredients: string[] }): Observable<any> {
     return this.http.post<any>(this.API, Receita);
+  }
+
+  getReceitaDetalhes(id: number): Observable<Receita> {
+    return this.http.get<Receita>(`${this.API}/${id}`);
+  }
+
+  adicionarComentario(id: number, comentario: string) {
+    return this.http.post(`${this.API}/comentarios`, {
+      receitaId: id,
+      texto: comentario,
+      usuarioId: localStorage.getItem('userId'), // Pegue o usuário autenticado
+    });
+  }
+
+  adicionarAvaliacao(avaliacao: any, receitaId: number) {
+    return this.http.post(`${this.API}/${receitaId}/rating`, avaliacao);
   }
 }

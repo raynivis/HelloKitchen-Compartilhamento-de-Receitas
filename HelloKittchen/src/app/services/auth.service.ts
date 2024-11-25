@@ -11,6 +11,7 @@ import { LoginData } from '../models/login.model';
 })
 export class AuthService {
   private readonly baseAPI = environment.URL_BASE + '/auth';
+  private readonly API = environment.URL_BASE;
   private readonly http = inject(HttpClient);
   private readonly storageService = inject(StorageService);
   private readonly router = inject(Router);
@@ -64,6 +65,11 @@ export class AuthService {
   getUser(): Usuario | null {
     return this.currentUserSubject.value;
   }
+
+  getUserById(userId: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.API}/users/${userId}`);
+  }
+  
 
   isLoggedIn(): boolean {
     const user = this.getUserStorage(false);
