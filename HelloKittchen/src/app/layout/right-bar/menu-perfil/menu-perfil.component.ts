@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ImagesPefilService } from '../../../additional/images.pefil.service';
+import { ImagesPerfilService } from '../../../additional/images.perfil.service';
 import { Usuario } from '../../../models/usuario.model';
 @Component({
   selector: 'app-menu-perfil',
@@ -20,12 +20,12 @@ export class MenuPerfilComponent {
   loginData = { email: '', password: '' };
   registerData = { name: '', email: '', password: '' };
   isAuthenticated = false;
-  public readonly imageService = inject(ImagesPefilService);
+  public readonly imageService = inject(ImagesPerfilService);
+  private authService = inject(AuthService)
   errorMessage: string = '';
-
-  constructor(private authService: AuthService) {
-  }
-
+  @ViewChild('usuarioEditarModal') modalElement!: ElementRef;
+  @ViewChild('InputNome') InputNome!: ElementRef;
+  userNovo!: Usuario;
 
   ngOnInit() {
     this.authService.atualUser.subscribe((user) => {
@@ -113,6 +113,26 @@ export class MenuPerfilComponent {
 
   updateUIForAuthenticatedUser(): void {
     this.isAuthenticated = true; // Variável de estado no componente
+  }
+
+  openModalEdit() {
+    if (this.isAuthenticated) {
+      this.InputNome.nativeElement.value = this.user!.name;
+      const modal = new (window as any).bootstrap.Modal(this.modalElement.nativeElement);
+      modal.show();
+    } else {
+      console.error('Modal element não encontrado');
+    }
+  }
+
+  salvarUsuario(){
+  this.authService.getUsers(this.user?.id!).subscribe(dado => {
+    this.userNovo = dado;
+    this.userNovo.name = this.InputNome.nativeElement.value;
+    this.authService.updateUser(this.userNovo.id, this.userNovo).subscribe();
+    alert('Suas informações foram atualizadas!');
+    window.location.reload();
+  });
   }
 
 }

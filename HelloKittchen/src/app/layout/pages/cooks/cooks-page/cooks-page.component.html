@@ -1,6 +1,8 @@
-<div class="container mt-3">
+<div class="container mt-3 text-center">
   <!-- Título Dinâmico -->
-  <h2>Receitas da Categoria {{ categoryId }}</h2>
+   <p>⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆</p>
+  <h5 style="color: #70564e;">Receitas da Categoria</h5>
+  <p>⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆</p>
 
   <!-- Dropdown para Ordenação -->
   <div class="mb-3">
@@ -16,7 +18,7 @@
       <option class="select-item" value="name">Nome</option>
     </select>
   </div>
-
+</div>
   <!-- Mensagem de Carregamento -->
   @if(isLoading){
     <div class="text-center">
@@ -26,7 +28,7 @@
 
   @if(!isLoading && receitas.length === 0){
     <div class="text-center">
-      <p>Nenhuma receita encontrada!</p>
+      <p>Nenhuma receita encontrada (╥﹏╥)</p>
     </div>
   }
   <!-- Lista de Receitas -->
@@ -87,7 +89,7 @@
             </div>
           </div>
         </article>
+        <app-post-recipe [receita]="receita"></app-post-recipe>
         }
     </div>
   }
-</div>
