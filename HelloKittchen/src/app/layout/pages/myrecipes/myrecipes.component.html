@@ -11,7 +11,7 @@
     <p class="texto-titulo" style="font-size: 15px; "> Minhas Receitas </p>
     <div class="p-2">
       <button class="btn btn-CRUD texto-titulo" type="button" [routerLink]="'/cooks/post'">
-        <svg width="35" height="35" style="border-right:  solid;">
+        <svg width="35" height="35" style="border-right:  solid; margin: 0px; padding: 0px;">
           <image width="35" height="35" href="assets/gifs/hello.gif"></image>
         </svg>
         Criar nova Receita!
@@ -28,8 +28,8 @@
   <div class="inside-post d-flex justify-content-between">
     <div>
       <div class="d-flex flex-row">
-        @if (true) {
-          <button class="opp-button card shadow m-1">
+        @if (!receita.published_at) {
+          <button (click)="openModalDelete(receita.id)" class="opp-button card shadow m-1">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#cd2454">
               <path
                 d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
@@ -44,10 +44,21 @@
         </button>
       </div>
     </div>
-    °❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･
+    <p class="flex-fill">
+      °❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･
+    </p>
+
     <div>
-      @if(true){
-        <button class="btn btn-CRUD texto-titulo" type="button" style="font-size: 12px;">
+      @if(!receita.published_at){
+        <button class="btn btn-CRUD texto-titulo" type="button" style="font-size: 12px; margin-right: 5px;">
+          <svg width="30" height="25">
+            <image href="assets/gifs/post-hello2.gif" width="30" height="25">
+            </image>
+          </svg>
+          Ver Receita
+        </button>
+
+        <button (click)="publicarReceita(receita)" class="btn btn-CRUD texto-titulo" type="button" style="font-size: 12px;">
           <svg width="40" height="25">
             <image width="40" height="25" href="assets/gifs/post-hello.gif"></image>
           </svg>
@@ -68,3 +79,34 @@
   </div>
 </article>
 }
+
+<!--Modal delete-->
+<div class="modal fade text-card" #receitaExcluirModal tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content form-modal">
+      <div class="modal-header">
+        <div class="post" style="border-radius: 45%;">
+          <div class="inside-post" style="border-radius: 45%;">
+            <p style="
+     font-family: 'PixelSix00', sans-serif; color: #f4b9cf; font-size: 11px; height: 1px;">
+              excluir receita
+            </p>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Você realmente deseja excluir essa receita?
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button (click)="excluirReceita()" type="button" class="btn d-flex align-items-center" style="max-width: 80px;
+        max-height: 20px; color: #fdfeff;
+        border-radius: 15%;background-color: #ec2335;">sim</button>
+        <button type="button" class="btn  d-flex align-items-center" data-bs-dismiss="modal" style="  max-width: 80px;
+        max-height: 20px; color: #fdfeff;
+        border-radius: 15%; background-color: #50e3c2;">não</button>
+      </div>
+    </div>
+  </div>
+</div>
