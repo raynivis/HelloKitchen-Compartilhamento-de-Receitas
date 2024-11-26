@@ -18,6 +18,6 @@ export class PostRecipeComponent {
   private readonly router = inject(Router);
 
   abrirReceita(id: number): void {
-    this.router.navigate(['/cooks', id]);
+    this.router.navigate(['/recipe', id]);
   }
 }

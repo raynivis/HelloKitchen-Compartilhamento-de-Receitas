@@ -57,8 +57,8 @@ export class ReceitaService {
     });
   }
 
-  adicionarAvaliacao(avaliacao: any, receitaId: number) {
-    return this.http.post(`${this.API}/${receitaId}/rating`, avaliacao);
+  adicionarAvaliacao(avaliacao: { "rating": number, "comment": string}, receitaId: number) {
+    return this.http.post<{"rating": number, "comment": string}>(`${this.API}/${receitaId}/rating`, avaliacao);
   }
 
   publicar(receitaId:number, recipe: Receita): Observable<Receita>{

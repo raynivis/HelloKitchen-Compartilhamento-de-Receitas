@@ -28,7 +28,7 @@ export class BooksComponent implements OnInit{
   livroEditId!: number;
 
   ngOnInit(): void {
-    if(this.authService.atualUser){
+    if(!this.authService.isLoggedIn()){
       this.router.navigate(['/opss']);
     }
 
