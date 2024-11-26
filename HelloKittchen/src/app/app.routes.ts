@@ -13,9 +13,9 @@ import { MyrecipesComponent } from './layout/pages/myrecipes/myrecipes.component
 export const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'news', component: NewsComponent},
-  {path: 'cooks', component: CooksComponent},
-  { path: 'cooks/post', component: CookPostComponent },
-  { path: 'cooks/:id', component: CooksDetailsComponent },
+  {path: 'cooks', component: CooksComponent}, 
+  {path: 'cooks/post', component: CookPostComponent },
+  {path: 'cooks/:id', component: CooksDetailsComponent },
   {path: 'categoria/:id', component: CooksPageComponent}, //vai ter o id da categoria
   {path: 'books', component: BooksComponent},
   {path: 'book/:id', component: BooksPageComponent}, //vai ter o id do livro

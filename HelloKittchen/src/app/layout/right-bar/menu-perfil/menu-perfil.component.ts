@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ImagesPerfilService } from '../../../additional/images.perfil.service';
 import { Usuario } from '../../../models/usuario.model';
+
 @Component({
   selector: 'app-menu-perfil',
   standalone: true,

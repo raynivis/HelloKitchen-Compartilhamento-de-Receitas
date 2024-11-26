@@ -3,11 +3,12 @@ import { ContentMyrecipesComponent } from "./content-myrecipes/content-myrecipes
 import { Receita } from '../../../models/receita.model';
 import { ReceitaService } from '../../../services/receita.service';
 import { PostRecipeComponent } from "../../items/post-recipe/post-recipe.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-myrecipes',
   standalone: true,
-  imports: [ContentMyrecipesComponent, PostRecipeComponent],
+  imports: [ContentMyrecipesComponent, PostRecipeComponent, RouterModule],
   templateUrl: './myrecipes.component.html',
   styleUrl: './myrecipes.component.scss'
 })
