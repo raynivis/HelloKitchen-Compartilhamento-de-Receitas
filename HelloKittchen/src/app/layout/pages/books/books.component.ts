@@ -1,9 +1,10 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { ImagesPerfilService } from '../../../additional/images.perfil.service';
 import { ContentBooksComponent } from "./content-books/content-books.component";
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { LivroService } from '../../../services/livro.service';
 import { Livro } from '../../../models/livro.model';
+import { AuthService } from '../../../services/auth.service';
 
 
 @Component({
@@ -16,15 +17,21 @@ import { Livro } from '../../../models/livro.model';
 export class BooksComponent implements OnInit{
   public readonly imageService = inject(ImagesPerfilService);
   private readonly livrosService = inject(LivroService);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
   livros: Livro[] = [];
   @ViewChild('livroEditarModal') modalElement!: ElementRef;
   @ViewChild('livroExcluirModal') modalElementDelete!: ElementRef;
-
   @ViewChild('InputLivro') InputLivro!: ElementRef<HTMLInputElement>;
   livroEdit: { name: string } = { name: '' };
   livroEditId!: number;
 
   ngOnInit(): void {
+    if(this.authService.atualUser){
+      this.router.navigate(['/opss']);
+    }
+
     this.livrosService.list().subscribe({
       next: (dado) => {
         this.livros = dado.items;

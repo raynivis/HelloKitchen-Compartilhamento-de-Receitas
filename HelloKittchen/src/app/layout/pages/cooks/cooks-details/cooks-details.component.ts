@@ -27,7 +27,7 @@ export class CooksDetailsComponent implements OnInit{
     dateCreated: '',
     lastUpdated: ''
   };
-  
+
   isUserAuthenticated = false;
   private readonly storageService = inject(StorageService);
   private id = 0;
@@ -50,7 +50,7 @@ export class CooksDetailsComponent implements OnInit{
         const userRequests = this.receita.ratings.map((rating) =>
           this.authService.getUserById(rating.user.id)
         );
-  
+
         forkJoin(userRequests).subscribe((users) => {
           this.receita.ratings.forEach((Avaliacao, index) => {
             Avaliacao.userName = users[index]?.name || 'Usuário Desconhecido';
@@ -74,14 +74,14 @@ export class CooksDetailsComponent implements OnInit{
         dateCreated: new Date().toISOString(),
         lastUpdated: new Date().toISOString()
       };
-  
+
       this.receitaService.adicionarAvaliacao(avaliacao, this.receita.id).subscribe(() => {
         this.carregarReceita(this.receita.id); // Atualiza os dados após a avaliação
         this.resetarNovaAvaliacao();
       });
     }
   }
-  
+
   resetarNovaAvaliacao(): void {
     this.novaAvaliacao = {
       recipe: '',
@@ -92,7 +92,7 @@ export class CooksDetailsComponent implements OnInit{
       dateCreated: '',
       lastUpdated: ''
     };
-  }  
+  }
 
   generateStarArray(score: number): string[] {
     const stars = [];

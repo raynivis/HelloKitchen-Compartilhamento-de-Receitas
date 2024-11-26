@@ -7,8 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { Receita } from '../../../../models/receita.model';
 import { Categoria } from '../../../../models/categoria.model';
 import { StarsService } from '../../../../additional/stars.service';
-import { StarsComponent } from "../../../items/stars/stars.component";
 import { PostRecipeComponent } from "../../../items/post-recipe/post-recipe.component";
+import { CategoriaService } from '../../../../services/categoria.service';
 @Component({
   selector: 'app-cooks-page',
   standalone: true,
@@ -23,27 +23,38 @@ export class CooksPageComponent implements OnInit{
   private readonly route = inject(ActivatedRoute);
   private readonly receitaService = inject(ReceitaService);
   private readonly router = inject(Router);
+  private readonly categoriasService = inject(CategoriaService);
   id!: number; //id da categoria
   receitas: Receita[] = []; // Lista de receitas
+  categorias: Categoria[] = [];
   isLoading = true; // Indica carregamento
   sortBy: string = 'score';
   categoryId: number | null = null; // ID da categoria capturada na URL
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.id = params['id']; //recebendo no id o get passado por parametro
-      this.categoryId = this.id ? +this.id : null;
+    this.categoriasService.list().subscribe((dado) => {
+      this.categorias = dado;
+      this.route.params.subscribe(params => {
+        if(this.id){
+          this.router.navigate(['/opss']);
+        }
+        this.id = params['id']; //recebendo no id o get passado por parametro
+        this.categoryId = this.id ? +this.id : null;
 
-      if (this.categoryId) {
-        this.loadRecipes();
-      } else {
-        console.error('ID de categoria não encontrado na URL.');
-        this.isLoading = false;
-      }
+        if (this.categoryId) {
+          this.loadRecipes();
+        } else {
+          this.router.navigate(['/opss']);
+          this.isLoading = false;
+        }
+      });
     });
   }
 
   loadRecipes(): void {
+    if(this.categoryId! > this.categorias.length){
+      this.router.navigate(['/opss']);
+    }
     this.receitaService.getAllRecipes().subscribe({
       next: (data) => {
         console.log('Dados retornados pela API:', data); // Log para depuração
@@ -84,7 +95,7 @@ export class CooksPageComponent implements OnInit{
       return 0;
     });
   }
-  
+
   abrirReceita(id: number): void {
     this.router.navigate(['/cooks', id]);
   }
