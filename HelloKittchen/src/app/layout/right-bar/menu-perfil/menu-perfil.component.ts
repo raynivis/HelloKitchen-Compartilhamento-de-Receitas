@@ -6,6 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ImagesPerfilService } from '../../../additional/images.perfil.service';
 import { Usuario } from '../../../models/usuario.model';
+import { ReceitaService } from '../../../services/receita.service';
+import { Receita } from '../../../models/receita.model';
+import { StarsComponent } from "../../items/stars/stars.component";
+import { StarsService } from '../../../additional/stars.service';
 @Component({
   selector: 'app-menu-perfil',
   standalone: true,
@@ -22,10 +26,14 @@ export class MenuPerfilComponent {
   isAuthenticated = false;
   public readonly imageService = inject(ImagesPerfilService);
   private authService = inject(AuthService)
+  private readonly receitasService = inject(ReceitaService);
   errorMessage: string = '';
   @ViewChild('usuarioEditarModal') modalElement!: ElementRef;
   @ViewChild('InputNome') InputNome!: ElementRef;
   userNovo!: Usuario;
+  receitas: Receita[] = [];
+  public readonly starsService = inject(StarsService);
+
 
   ngOnInit() {
     this.authService.atualUser.subscribe((user) => {
@@ -35,10 +43,14 @@ export class MenuPerfilComponent {
     if (this.user) {
       this.isAuthenticated = true;
       console.log('Usuário logado:', this.user.name);
+      this.receitasService.getMyRecipes().subscribe(dado => {
+        this.receitas = dado.items;
+      });
     } else {
       console.warn('Nenhum usuário logado.');
       this.isAuthenticated = false;
     }
+
   }
 
   logout() {
@@ -132,7 +144,20 @@ export class MenuPerfilComponent {
     this.authService.updateUser(this.userNovo.id, this.userNovo).subscribe();
     alert('Suas informações foram atualizadas!');
     window.location.reload();
+
   });
+  }
+
+  calcularEstrelas(): number{
+    var soma = 0;
+    var i = 0;
+    for (const receita of this.receitas) {
+      if(receita.published_at){
+        soma = receita.score;
+        i++;
+      }
+    }
+    return soma/i;
   }
 
 }

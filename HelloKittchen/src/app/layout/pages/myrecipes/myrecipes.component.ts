@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { ContentMyrecipesComponent } from "./content-myrecipes/content-myrecipes.component";
 import { Receita } from '../../../models/receita.model';
 import { ReceitaService } from '../../../services/receita.service';
@@ -14,6 +14,9 @@ import { PostRecipeComponent } from "../../items/post-recipe/post-recipe.compone
 export class MyrecipesComponent implements OnInit{
   private readonly receitasService = inject(ReceitaService);
   receitas: Receita[] = [];
+  @ViewChild('receitaExcluirModal') modalElementDelete!: ElementRef;
+  livroReceitaDelete!: number;
+
 
   ngOnInit(): void {
     this.receitasService.getMyRecipes().subscribe(dado => {
@@ -24,4 +27,27 @@ export class MyrecipesComponent implements OnInit{
     })
   }
 
+  publicarReceita(receita: Receita){
+    this.receitasService.publicar(receita.id, receita).subscribe( dado => {
+      alert('Receita de '+ dado.name + ' publicada com sucesso');
+      window.location.reload();
+    });
+  }
+
+  openModalDelete(idReceita: number) {
+    if (this.modalElementDelete) {
+      const modal = new (window as any).bootstrap.Modal(this.modalElementDelete.nativeElement);
+      modal.show();
+      this.livroReceitaDelete = idReceita;
+    } else {
+      console.error('Modal element não encontrado');
+    }
+  }
+
+  excluirReceita(){
+    this.receitasService.deleteRecipe(this.livroReceitaDelete).subscribe(dado =>{
+      alert('Receita excluida com sucesso!');
+      window.location.reload();
+    });
+  }
 }

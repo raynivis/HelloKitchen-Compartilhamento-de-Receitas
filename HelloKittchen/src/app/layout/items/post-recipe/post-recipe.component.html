@@ -20,15 +20,17 @@
       <h5>{{receita.name}}</h5>
       <p>{{receita.description}}</p>
       <app-stars [score]="receita.score"></app-stars>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn-page" (click)="abrirReceita(receita.id)">
-          <svg width="32" height="32">
-            <image href="assets/auxiliares/hello-cozinhar.png" width="32" height="32">
-            </image>
-          </svg>
-          Vamos cozinhar!!
-        </button>
-      </div>
+      @if (receita.published_at) {
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button class="btn-page" (click)="abrirReceita(receita.id)">
+            <svg width="32" height="32">
+              <image href="assets/auxiliares/hello-cozinhar.png" width="32" height="32">
+              </image>
+            </svg>
+            Vamos cozinhar!!
+          </button>
+        </div>
+      }
     </div>
   </div>
  </article>
