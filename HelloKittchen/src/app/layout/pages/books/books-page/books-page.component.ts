@@ -44,7 +44,7 @@ export class BooksPageComponent implements OnInit{
   }
 
   openModalDelete(idReceitaLivro: number) {
-    if (this.modalElement) {
+    if (this.modalElementDelete) {
       const modal = new (window as any).bootstrap.Modal(this.modalElementDelete.nativeElement);
       modal.show();
       this.livroReceitaIdEdit = idReceitaLivro;

@@ -26,7 +26,7 @@ export class BooksPageContentComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.recipesService.getAllRecipes().subscribe(dado => {this.receitas = dado}); //mudar depois para mine recipes
+    this.recipesService.getMyRecipes().subscribe(dado => {this.receitas = dado.items});
   }
 
   openModalAdd() {

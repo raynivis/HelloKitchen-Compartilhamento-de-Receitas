@@ -60,4 +60,14 @@ export class ReceitaService {
   adicionarAvaliacao(avaliacao: any, receitaId: number) {
     return this.http.post(`${this.API}/${receitaId}/rating`, avaliacao);
   }
+
+  publicar(receitaId:number, recipe: Receita): Observable<Receita>{
+    return this.http.patch<Receita>(`${this.API}/${receitaId}/publish`, recipe);
+  }
+
+  deleteRecipe(receitaId:number): Observable<undefined> {
+    return this.http.delete<undefined>(`${this.API}/${receitaId}`);
+  }
+
+
 }
