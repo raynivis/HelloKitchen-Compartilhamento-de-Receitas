@@ -100,5 +100,13 @@ export class AuthService {
     return this.http.get<Usuario>(`${this.baseAPIUser}/${id}`);
   }
 
+  updateUserToken(userNovo: Usuario): void {
+  const userAntigo = this.storageService.get('user');
+
+  const userAtualizado = { ...userAntigo, ...userNovo };
+
+  this.storageService.set('user', userAtualizado);
+  }
+
 }
 
