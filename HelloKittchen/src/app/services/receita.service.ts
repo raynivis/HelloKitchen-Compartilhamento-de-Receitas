@@ -26,6 +26,10 @@ export class ReceitaService {
     );
   }
 
+  getMyRecipes(): Observable<Pagination<Receita>>{
+    return this.http.get<Pagination<Receita>>(`${this.API}/mine`);
+  }
+
   getRecipesByCategory(
     categoryId: number,
     sortBy: string = 'score'

@@ -36,59 +36,6 @@
     <div class="row">
       @for (receita of receitas; track $index) {
         <!--Post Receita-->
-        <article class="col-md-12 post">
-          <div class="d-flex flex-row inside-post">
-            <div>
-              <img [src]="imageService.getPerfilAleatorio(receita.user.email.length)" alt="imagem de perfil"> <!--quero usar ts nesse alt-->
-            </div>
-            <div class="p-2 flex-fill text-post">
-              <div class="d-flex justify-content-start align-items-end">
-                <div class="post" style="border-radius: 45%;">
-                  <div class="inside-post" style="border-radius: 45%;">
-                    <p style="
-                        font-family: 'PixelSix00', sans-serif; color: #f4b9cf; font-size: 11px; height: 1px;">
-                      {{receita.user.name}}
-                    </p>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-end flex-fill">
-                  <!--Quando clicar em um desses paragraphs a rota vai para o livro ou categoria-->
-                  <p class="post-tag"> livro</p>
-                  <p class="post-tag"> {{receita.category.name.toLowerCase()}}</p>
-                </div>
-        
-              </div>
-              <h5>{{receita.name}}</h5>
-              <p>{{receita.description}}</p>
-              <ul class="stars">
-                <p style="align-items: center;">{{receita.score}}/5 - </p> 
-                @for(star of generateStarArray(receita.score); track $index){
-                  <li>
-                    <svg *ngIf="star === 'full'" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#f8d92a">
-                      <path d="m352-293 128-76 129 76-34-144 111-95-147-13-59-137-59 137-147 13 112 95-34 144ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
-                    </svg>
-                    <svg *ngIf="star === 'half'" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#f8d92a">
-                      <path d="m609-293-34-144 111-95-147-13-59-137v313l129 76ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
-                    </svg>
-                    <svg *ngIf="star === 'empty'" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#ddd">
-                      <path d="m243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
-                    </svg>
-                  </li>  
-                }
-              </ul>  
-                     
-              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn-page" (click)="abrirReceita(receita.id)">
-                  <svg width="32" height="32">
-                    <image href="assets/auxiliares/hello-cozinhar.png" width="32" height="32">
-                    </image>
-                  </svg>
-                  Vamos cozinhar!!
-                </button>
-              </div>
-            </div>
-          </div>
-        </article>
         <app-post-recipe [receita]="receita"></app-post-recipe>
         }
     </div>
