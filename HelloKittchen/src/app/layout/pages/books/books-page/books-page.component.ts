@@ -28,6 +28,7 @@ export class BooksPageComponent implements OnInit{
 
   ngOnInit(){
     this.route.params.subscribe(params => {
+
       this.id = params['id']; //recebendo no id o get passado por parametro
       this.bookRecipeService.list(this.id).subscribe(dado => {this.receitaLivros = dado.items;})
     });

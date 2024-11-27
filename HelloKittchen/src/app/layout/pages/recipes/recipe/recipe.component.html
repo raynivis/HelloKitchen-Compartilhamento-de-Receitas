@@ -1,0 +1,138 @@
+@if (receita) {
+<article class="col-md-12 post" style="border-radius: 2%;">
+  <div class="inside-post" style="border-radius: 2%;">
+    <div class="d-flex flex-row">
+      <div>
+        <img [src]="imageService.getPerfilAleatorio(receita.user.email.length)" alt="imagem de perfil">
+        <!--quero usar ts nesse alt-->
+      </div>
+      <div class="p-2 flex-fill text-post">
+        <div class="d-flex justify-content-start align-items-end">
+          <div class="post" style="border-radius: 45%;">
+            <div class="inside-post" style="border-radius: 45%;">
+              <p style="
+                    font-family: 'PixelSix00', sans-serif; color: #f4b9cf; font-size: 11px; height: 1px;">
+                {{receita.user.name}}
+              </p>
+            </div>
+          </div>
+        </div>
+        <h5>{{receita.name}}</h5>
+        <p>{{receita.description}}</p>
+        <app-stars [score]="receita.score"></app-stars>
+      </div>
+    </div>
+    @if(receita.images[0]){
+    @if(receita.images.length > 1) {
+    <div id="carouselExample" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img [src]="receita.images[0].url" class="d-block w-100 h-100" alt="...">
+        </div>
+        @for (imagem of receita.images; track $index) {
+        @if($index !== 0){
+        <div class="carousel-item">
+          <img [src]="imagem.url" class="d-block w-100 h-100" alt="...">
+        </div>
+        }
+        }
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    }@else {
+    <div>
+      <img [src]="receita.images[0].url" class="d-block w-100 h-100" alt="...">
+    </div>
+    }
+    }
+
+    <div class="post">
+      <div class="text-post inside-post" style="font-size: 13px;">
+        <!-- Informações Gerais -->
+        <p><strong>Categoria:</strong> {{ receita.category.name }}</p>
+        <p><strong>Tempo de Preparo:</strong> {{ receita.preparationTime }} minutos</p>
+        <p><strong>Porções:</strong> {{ receita.portion }}</p>
+        <p><strong>Calorias:</strong> {{ receita.calories }}</p>
+        <p><strong>Publicado por:</strong> {{ receita.user.name }}</p>
+        <p><strong>Data de Publicação:</strong> {{ receita.published_at | date }}</p>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="text-post inside-post" style="font-size: 13px;">
+        <!-- Ingredientes -->
+        <h6>Ingredientes:</h6>
+        <ul>
+          @for (ingrediente of receita.ingredients; track $index) {
+          <li>
+            {{ ingrediente.name }} - {{ ingrediente.amount }} {{ ingrediente.type }}
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="text-post inside-post" style="font-size: 13px;">
+        <!-- Instruções -->
+        <h6>Instruções</h6>
+        <ol>
+          @for (passo of receita.instructions; track $index) {
+          <li>
+            {{ passo.step }}
+          </li>
+          }
+        </ol>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="text-post inside-post" style="font-size: 13px;">
+        <h6 class="titulo">Avaliações</h6>
+        <div *ngFor="let avaliacao of receita?.ratings" class="border border-danger-subtle">
+          <div class="avaliacao-header">
+
+            <!--NOMES E RECEITASS-->
+
+            <app-stars [score]="avaliacao.rating"></app-stars>
+          </div>
+          <strong>Comentário: </strong>
+          <p class="avaliacao-comment">{{ avaliacao.comment }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+@if (user) {
+<article class="col-md-12 post">
+  <div class="inside-post avaliacao d-flex align-items-center flex-column">
+    <h6>Deixe sua Avaliação</h6>
+    <select #InputStars class="form-select p-2 flex-fill" aria-label="Default select example">
+      <option value="1">1 star (´•︵•`)</option>
+      <option value="2">2 stars (ᴗ_ ᴗ。)</option>
+      <option value="3">3 stars •‿•</option>
+      <option value="4">4 stars ٩(^ᗜ^ )و </option>
+      <option selected value="5">5 stars!! ◝(ᵔᗜᵔ)◜</option>
+    </select>
+    <div class="form-floating p-2" style="width: 100%;">
+      <textarea #InputComment class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+      <label for="floatingTextarea2">Comments</label>
+    </div>
+    <button (click)="adicionarAvaliacao()" class="btn btn-CRUD">Enviar Avaliação ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧</button>
+  </div>
+</article>
+
+}
+
+}
+@else {
+<app-no-page></app-no-page>
+}

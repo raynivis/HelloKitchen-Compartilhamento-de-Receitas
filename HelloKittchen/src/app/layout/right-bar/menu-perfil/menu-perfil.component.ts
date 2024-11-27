@@ -142,9 +142,9 @@ export class MenuPerfilComponent {
     this.userNovo = dado;
     this.userNovo.name = this.InputNome.nativeElement.value;
     this.authService.updateUser(this.userNovo.id, this.userNovo).subscribe();
+    this.authService.updateUserToken(this.userNovo);
     alert('Suas informações foram atualizadas!');
     window.location.reload();
-
   });
   }
 
