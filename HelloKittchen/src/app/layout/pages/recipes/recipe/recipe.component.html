@@ -96,17 +96,19 @@
     <div class="post">
       <div class="text-post inside-post" style="font-size: 13px;">
         <h6 class="titulo">Avaliações</h6>
-        <div *ngFor="let avaliacao of receita?.ratings" class="border border-danger-subtle">
-          <div class="avaliacao-header">
+        @for(avaliacao of receita.ratings; track $index){
+          <div class="border border-danger-subtle">
+            <div class="avaliacao-header">
 
-            <!--NOMES E RECEITASS-->
+              <!--NOMES E RECEITASS-->
 
 
-            <app-stars [score]="avaliacao.rating"></app-stars>
+              <app-stars [score]="avaliacao.rating"></app-stars>
+            </div>
+            <strong>Comentário: </strong>
+            <p class="avaliacao-comment">{{ avaliacao.comment }}</p>
           </div>
-          <strong>Comentário: </strong>
-          <p class="avaliacao-comment">{{ avaliacao.comment }}</p>
-        </div>
+        }
       </div>
     </div>
   </div>

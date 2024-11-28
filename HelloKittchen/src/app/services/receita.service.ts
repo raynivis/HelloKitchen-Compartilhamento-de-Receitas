@@ -79,5 +79,8 @@ export class ReceitaService {
     return this.http.delete<undefined>(`${this.API}/${receitaId}`);
   }
 
+  updateReceita(receita: Receita): Observable<Receita> {
+    return this.http.post<any>(this.API, receita); // Requisição PATCH
+  }
 
 }
