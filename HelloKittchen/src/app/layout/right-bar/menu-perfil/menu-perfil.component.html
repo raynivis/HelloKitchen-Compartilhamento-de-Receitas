@@ -30,11 +30,12 @@
   </ul>
 
   <svg width="100" height="80">
-    <image width="88" height="60" href="assets/gifs/gifDireita.gif"></image>
+    <image width="88" height="60" alt="Personagens da Turma da Hello Kitty com bebidas" href="assets/gifs/gifDireita.gif"></image>
   </svg>
   <button class="botao-menu" [routerLink]="'/books'">
-    <p class="text-sans" style=" color: #81c281;"><img src="assets/auxiliares/cereja.png" width="14" height="12" alt="">
-      books </p>
+    <p class="text-sans" style=" color: #81c281;"><img alt="Ícone de cerejas sorridentes" src="assets/auxiliares/cereja.png" width="14" height="12"
+        alt=""> books </p>
+
   </button>
   <button class="botao-menu" [routerLink]="'/my-recipes'">
     <p> my recipes</p>
@@ -43,14 +44,15 @@
     <p>sign out</p>
   </button>
   } @else {
-  <img class="fotoSem" src="assets/icons/logout.png" alt="">
-  <button type="button" class="botao-menu" data-bs-toggle="modal" data-bs-target="#userModal">
-    <p> login </p>
-  </button>
-  <p>
-    acesse sua conta para ter uma melhor interação no nosso site (✿◕‿◕)ﾉ
-  </p>
-  <img src="assets/gifs/gifDireita.gif" alt="" style="left: 0;
+    <img class="fotoSem" alt="Ícone de logout com um ponto de interrogação" src="assets/icons/logout.png" alt="">
+    <button type="button" class="botao-menu" data-bs-toggle="modal" data-bs-target="#userModal">
+      <p> login </p>
+    </button>
+    <p>
+      acesse sua conta para ter uma melhor interação no nosso site (✿◕‿◕)ﾉ
+    </p>
+    <img alt="Personagens da Turma da Hello Kitty com bebidas" src="assets/gifs/gifDireita.gif" alt="" style="left: 0;
+
     top: 0;
     width: 95px;
     height: 60px;">

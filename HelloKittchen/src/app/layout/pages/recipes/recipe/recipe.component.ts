@@ -46,7 +46,7 @@ export class RecipeComponent implements OnInit{
   adicionarAvaliacao(){
     var novaAvaliacao = { "rating": Number(this.InputStars.nativeElement.value), "comment": this.InputComment.nativeElement.value};
     this.receitasService.adicionarAvaliacao(novaAvaliacao, this.receita.id).subscribe();
-    alert('Avaliação enviada ao Usuário!');
+    alert('Avaliação enviada ao Usuário! ε(´｡•᎑•`)っ 💕');
     window.location.reload();
   }
 

@@ -1,15 +1,16 @@
 <div class="d-flex flex-column mb-3 text-card d-flex align-items-center">
-  <p class="texto-titulo" style="font-size: 15px; ">Aqui estão as receitas cadastradas a seu livro!
+  <p class="texto-titulo" style="font-size: 15px; "> ✩࿐࿔ Aqui estão as receitas cadastradas a seu livro! ✩࿐࿔  
   </p>
   <p>૮₍´˶• . • ⑅ ₎ა</p>
   <svg width="100" height="80">
-    <image width="100" height="80" href="assets/gifs/kuromi-book.gif"></image>
+    <image width="100" height="80" alt="Personagem 'Kuromi' sentada balançando as pernas com brilhinhos aparecendo"
+    href="assets/gifs/kuromi-book.gif"></image>
   </svg>
 
   <div class="p-1">
     <button (click)="openModalAdd()" class="btn btn-CRUD texto-titulo" type="button">
       <svg width="35" height="35">
-        <image width="35" height="35" href="assets/gifs/kuromi-books.gif"></image>
+        <image width="35" height="35" alt="Personagem 'Kuromi' sentada piscando os olhinhos" href="assets/gifs/kuromi-books.gif"></image>
       </svg>
       Adicionar nova receita!
     </button>
@@ -26,7 +27,7 @@
           <div class="inside-post" style="border-radius: 45%;">
             <p style="
      font-family: 'PixelSix00', sans-serif; color: #f4b9cf; font-size: 11px; height: 1px;">
-              selecione uma receita que deseja adicionar
+              selecione uma receita que deseja adicionar ♡
             </p>
           </div>
         </div>
@@ -34,7 +35,7 @@
       </div>
       <div class="modal-body">
         <div class="mb-3 text-center">
-          <label for="formedit" class="form-label">Minhas Receitas:</label>
+          <label for="formedit" class="form-label">✩°Minhas Receitas:</label>
           <select #receitaId class="form-select" aria-label="Default select example">
             <option value="-1" selected>Selecione a Receita</option>
             @for (receita of receitas; track $index) {
@@ -42,7 +43,7 @@
             }
           </select>
           <div class="mb-3 text-center">
-            <label for="formedit" class="form-label">Notas da receita:</label>
+            <label for="formedit" class="form-label">₊˚⊹Notas da receita:</label>
             <textarea #Inputnotes class="form-control" id="Inputnotes" rows="5"></textarea>
           </div>
         </div>

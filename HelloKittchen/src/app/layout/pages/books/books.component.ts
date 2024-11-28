@@ -62,7 +62,7 @@ export class BooksComponent implements OnInit{
   editarLivro(){
     if(this.InputLivro.nativeElement.value.length < 4)
     {
-      alert('Erro: O nome do livro de ter mais de 3 letras!!');
+      alert('Erro: O nome do livro de ter mais de 3 letras!! (ᵕ—ᴗ—)');
       return;
     }
     this.livroEdit.name = this.InputLivro.nativeElement.value;
@@ -74,11 +74,11 @@ export class BooksComponent implements OnInit{
   excluirLivro() {
     this.livrosService.deleteBook(this.livroEditId).subscribe({
       next: () => {
-        alert('Livro excluído com sucesso!');
+        alert('Livro excluído com sucesso! ⸜(｡˃ ᵕ ˂ )⸝♡');
         window.location.reload();
       },
       error: (err) => {
-        alert('Não foi possível excluir o livro.');
+        alert('Não foi possível excluir o livro. (╥‸╥)');
       },
     });
   }
