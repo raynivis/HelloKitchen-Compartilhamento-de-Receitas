@@ -1,0 +1,153 @@
+<article class="col-md-12 post post-recipe-page" style="border-radius: 2%;">
+    <div class="inside-post" style="border-radius: 2%;">
+      <h2 class="text-center">Editar Receita</h2>
+      <div class="d-flex flex-row">
+        <form #form="ngForm" (ngSubmit)="updateRecipe($event)" novalidate>
+          <!-- Nome da Receita -->
+          <div class="mb-4">
+            <label for="recipeName" class="form-label">Nome da Receita</label>
+            <input
+              type="text"
+              class="form-control"
+              id="recipeName"
+              [(ngModel)]="receitas[0].name"
+              name="name"
+              required
+            />
+          </div>
+  
+          <!-- Descrição -->
+          <div class="mb-4">
+            <label for="recipeDescription" class="form-label">Descrição</label>
+            <textarea
+              class="form-control"
+              id="recipeDescription"
+              [(ngModel)]="receitas[0].description"
+              name="description"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+  
+          <!-- Categoria -->
+          <div class="mb-4">
+            <label for="recipeCategory" class="form-label">Categoria</label>
+            <select
+              class="form-select"
+              id="recipeCategory"
+              [(ngModel)]="receitas[0].category.id"
+              name="categoryId"
+              required
+            >
+              <option *ngFor="let categoria of categorias" [value]="categoria.id">
+                {{ categoria.name }}
+              </option>
+            </select>
+          </div>
+  
+          <!-- Informações Adicionais -->
+          <div class="row mb-4">
+            <div class="col">
+              <label for="preparationTime" class="form-label">Tempo em minutos</label>
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="receitas[0].preparationTime"
+                name="preparationTime"
+                required
+              />
+            </div>
+            <div class="col">
+              <label for="portion" class="form-label">Porções</label>
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="receitas[0].portion"
+                name="portion"
+                required
+              />
+            </div>
+            <div class="col">
+              <label for="calories" class="form-label">Calorias</label>
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="receitas[0].calories"
+                name="calories"
+                required
+              />
+            </div>
+          </div>
+  
+          <!-- Ingredientes -->
+          <div class="mb-4">
+            <h4>Ingredientes</h4>
+            <div *ngFor="let ingredient of ingredients; let i = index" class="input-group mb-2">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingrediente"
+                [(ngModel)]="ingredients[i].name"
+                name="ingredientName{{ i }}"
+                required
+              />
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Quantidade"
+                [(ngModel)]="ingredients[i].amount"
+                name="ingredientAmount{{ i }}"
+                required
+              />
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Tipo (ex: gramas, colheres)"
+                [(ngModel)]="ingredients[i].type"
+                name="ingredientType{{ i }}"
+                required
+              />
+              <button type="button" class="btn btn-danger" (click)="removeIngredient(i)">-</button>
+            </div>
+            <button type="button" class="btn btn-success" (click)="addIngredient()">+</button>
+          </div>
+  
+          <!-- Instruções -->
+          <div class="mb-4">
+            <h4>Instruções</h4>
+            <div *ngFor="let instruction of instructions; let i = index" class="input-group mb-4">
+              <textarea
+                class="form-control"
+                placeholder="Passo"
+                [(ngModel)]="instructions[i].step"
+                name="instructionStep{{ i }}"
+                rows="2"
+                required
+              ></textarea>
+              <button type="button" class="btn btn-danger" (click)="removeInstruction(i)">-</button>
+            </div>
+            <button type="button" class="btn btn-success" (click)="addInstruction()">+</button>
+          </div>
+  
+          <!-- Upload de Imagem -->
+          <div class="mb-4">
+            <h4>Imagem</h4>
+            <input
+              type="file"
+              class="form-control"
+              (change)="onFileSelected($event)"
+              accept=".png, .jpg, .jpeg, .svg"
+            />
+          </div>
+  
+          <!-- Botão de Submissão -->
+          <div class="text-center">
+            <button type="submit" [disabled]="!form.valid" class="btn btn-primary w-100">
+              Salvar Alterações
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+</article>
+  

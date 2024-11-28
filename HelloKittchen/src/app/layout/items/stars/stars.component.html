@@ -5,15 +5,23 @@
   @else {
     <p style="align-items: center;">0/5 - </p>
   }
-  <li *ngFor="let star of starsService.generateStarArray(score)">
-    <svg *ngIf="star === 'full'" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#f8d92a">
-      <path d="m352-293 128-76 129 76-34-144 111-95-147-13-59-137-59 137-147 13 112 95-34 144ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
-    </svg>
-    <svg *ngIf="star === 'half'" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#f8d92a">
-      <path d="m609-293-34-144 111-95-147-13-59-137v313l129 76ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
-    </svg>
-    <svg *ngIf="star === 'empty'" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#ddd">
-      <path d="m243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
-    </svg>
-  </li>
+  @for(star of starsService.generateStarArray(score); track $index){
+    <li>
+      @if(star === 'full'){
+        <svg xmlns="http://www.w3.org/2000/svg" height="13px" viewBox="0 -960 960 960" width="15px" fill="#f8d92a">
+          <path d="m352-293 128-76 129 76-34-144 111-95-147-13-59-137-59 137-147 13 112 95-34 144ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
+        </svg>
+      }@else{
+        @if(star === 'half'){
+          <svg xmlns="http://www.w3.org/2000/svg" height="13px" viewBox="0 -960 960 960" width="15px" fill="#f8d92a">
+            <path d="m609-293-34-144 111-95-147-13-59-137v313l129 76ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
+          </svg>
+        }@else{
+          <svg xmlns="http://www.w3.org/2000/svg" height="13px" viewBox="0 -960 960 960" width="15px" fill="#ddd">
+            <path d="m243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
+          </svg>
+        }
+      }
+    </li>
+  }
 </ul>

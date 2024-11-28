@@ -1,0 +1,228 @@
+<article class="col-md-12 post post-recipe-page" style="border-radius: 2%;">
+  <div class="inside-post" style="border-radius: 2%;">
+    <h2 class="text-center">Postar Nova Receita</h2>
+    <div class="d-flex flex-row">
+      <!-- Formulário com validação -->
+      <form #form="ngForm" (ngSubmit)="submitRecipe($event)" novalidate>
+        <!-- Nome da Receita -->
+        <div class="mb-4">
+          <label for="recipeName" class="form-label">Nome da Receita</label>
+          <input
+            type="text"
+            class="form-control"
+            id="recipeName"
+            [(ngModel)]="recipeData.name"
+            name="name"
+            placeholder="Digite o nome da receita"
+            required
+          />
+          @if(form.submitted && !form.controls['name'].valid){
+            <div class="text-danger">
+              Nome é obrigatório.
+            </div>
+          }
+        </div>
+
+        <!-- Descrição -->
+        <div class="mb-4">
+          <label for="recipeDescription" class="form-label">Descrição</label>
+          <textarea
+            class="form-control"
+            id="recipeDescription"
+            [(ngModel)]="recipeData.description"
+            name="description"
+            rows="3"
+            placeholder="Descreva sua receita"
+            required
+          ></textarea>
+          @if(form.submitted && !form.controls['description'].valid){
+            <div class="text-danger">
+              Descrição é obrigatória.
+            </div>
+          }
+        </div>
+
+        <!-- Categoria -->
+        <div class="mb-4">
+          <label for="recipeCategory" class="form-label">Categoria</label>
+          <select
+            class="form-select"
+            id="recipeCategory"
+            [(ngModel)]="recipeData.category.id"
+            name="categoryId"
+            required
+          >
+            @for(categoria of categorias; track $index){
+              <option [value]="categoria.id">
+                {{ categoria.name }}
+              </option>
+            }
+          </select>
+          @if(form.submitted && !form.controls['categoryId'].valid){
+            <div class="text-danger">
+              Selecione uma categoria.
+            </div>
+          }
+        </div>
+
+        <!-- Informações Adicionais -->
+        <div class="row mb-4">
+          <div class="col">
+            <label for="preparationTime" class="form-label">Tempo em minutos</label>
+            <input
+              type="number"
+              class="form-control"
+              id="preparationTime"
+              [(ngModel)]="recipeData.preparationTime"
+              name="preparationTime"
+              placeholder="Ex: 45"
+              required
+            />
+            @if(form.submitted && !form.controls['preparationTime'].valid){
+              <div class="text-danger">
+                Tempo de preparo é obrigatório.
+              </div>
+            }
+          </div>
+          <div class="col">
+            <label for="portion" class="form-label">Porções</label>
+            <input
+              type="number"
+              class="form-control"
+              id="portion"
+              [(ngModel)]="recipeData.portion"
+              name="portion"
+              placeholder="Ex: 4"
+              required
+            />
+            @if(form.submitted && !form.controls['portion'].valid){
+              <div class="text-danger">
+                Porções são obrigatórias.
+              </div>
+            }
+          </div>
+          <div class="col">
+            <label for="calories" class="form-label">Calorias</label>
+            <input
+              type="number"
+              class="form-control"
+              id="calories"
+              [(ngModel)]="recipeData.calories"
+              name="calories"
+              placeholder="Ex: 250"
+              required
+            />
+            @if(form.submitted && !form.controls['calories'].valid){
+              <div class="text-danger">
+                Calorias são obrigatórias.
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Ingredientes -->
+        <div class="mb-4">
+          <h4>Ingredientes</h4>
+          @for(ingredient of ingredients; track $index){
+            <div class="input-group mb-2">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingrediente"
+                [(ngModel)]="ingredients[$index].name"
+                name="ingredientName{{ $index }}"
+              />
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Quantidade"
+                [(ngModel)]="ingredients[$index].amount"
+                name="ingredientAmount{{ $index }}"
+              />
+              <!-- Tipo do Ingrediente -->
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Tipo (ex: gramas, colheres)"
+                [(ngModel)]="ingredients[$index].type"
+                name="ingredientType{{ $index }}"
+              />
+              <br>
+              @if($index >= 1){
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="removeIngredient($index)"
+                >
+                  -
+                </button>
+              }
+            </div>
+          }
+          <div class="d-grid gap-2">
+            <button type="button" class="btn btn-success" (click)="addIngredient()">
+              +
+            </button>
+          </div>
+        </div>
+        <!-- Instruções -->
+        <div class="mb-4">
+          <h4>Instruções</h4>
+          @for (instruction of instructions; track $index) {
+            <div class="input-group mb-4">
+              <textarea
+                class="form-control gap-2"
+                placeholder="Passo"
+                [(ngModel)]="instructions[$index].step"
+                name="instructionStep{{ $index }}"
+                rows="2"
+              ></textarea>
+              @if($index >= 1){
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="removeInstruction($index)"
+                >
+                  -
+                </button>
+              }
+            </div>
+          }
+          <div class="d-grid gap-2">
+            <button type="button" class="btn btn-success " (click)="addInstruction()">
+              +
+            </button>
+          </div>
+        </div>
+
+        <!-- Upload de Imagem -->
+        <div class="mb-4">
+          <h4>Imagem</h4>
+          <input
+            type="file"
+            class="form-control"
+            (change)="onFileSelected($event)"
+            accept=".png, .jpg, .jpeg, .svg"
+            required
+          />
+          @if(form.submitted && !fileSelected){
+            <div class="text-danger">
+              Uma imagem é obrigatória.
+            </div>
+          }
+        </div>
+
+        <!-- Botão de Submissão -->
+        <div class="text-center">
+          <button
+            type="submit"
+            [disabled]="!form.valid"
+            class="btn btn-primary w-100"
+          >
+            Salvar Receita
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</article>
