@@ -56,7 +56,7 @@ export class BooksPageComponent implements OnInit{
 
   editarLivroReceita(){
     if(this.Inputnotes.nativeElement.value == ''){
-      alert('Erro: Deixe alguma anotação!!!')
+      alert('Erro: Deixe alguma anotação!!! (¬`‸´¬)')
       return;
     }
 
@@ -64,14 +64,14 @@ export class BooksPageComponent implements OnInit{
       this.livroReceitaEdit = dado;
       this.livroReceitaEdit.notes = this.Inputnotes.nativeElement.value;
       this.bookRecipeService.updateBookRecipe(this.id, this.livroReceitaIdEdit, this.livroReceitaEdit).subscribe();
-      alert('Descrição editada com sucesso!');
+      alert('Descrição editada com sucesso! ദ്ദി ˉ͈̀꒳ˉ͈́ )✧');
       window.location.reload();
     })
   }
 
   apagarLivroReceita(){
     this.bookRecipeService.deleteBook(this.id, this.livroReceitaIdEdit).subscribe();
-    alert('Receita removida com sucesso!');
+    alert('Receita removida com sucesso! ദ്ദി ˉ͈̀꒳ˉ͈́ )✧');
     window.location.reload();
   }
 

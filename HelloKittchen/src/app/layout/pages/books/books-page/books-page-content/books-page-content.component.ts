@@ -40,16 +40,16 @@ export class BooksPageContentComponent implements OnInit{
 
   adicionarLivroReceita(){
     if(this.receitaId.nativeElement.value == "-1"){
-      alert('Erro: Seleciona uma receita!! está opção não é válida!')
+      alert('Erro: Seleciona uma receita!! está opção não é válida! ( ˶°ㅁ°)')
       return;
     }
     if(this.Inputnotes.nativeElement.value == ''){
-      alert('Erro: Deixe alguma anotação!!!')
+      alert('Erro: Deixe alguma anotação!!! ( ˶°ㅁ°)')
       return;
     }
     this.receitaNova = {recipe: {id: Number(this.receitaId.nativeElement.value)}, notes: this.Inputnotes.nativeElement.value};
     this.bookRecipeService.addRecipe(this.id, this.receitaNova).subscribe();
-    alert('Receita anotada com sucesso!');
+    alert('Receita anotada com sucesso! ૮ ˶ᵔ ᵕ ᵔ˶ ა');
     window.location.reload();
   }
 }

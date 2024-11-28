@@ -72,12 +72,12 @@ export class EditRecipeComponent implements OnInit {
     // Chama o serviço para atualizar a receita
     this.receitaService.updateReceita(this.receitas[0]).subscribe(
       () => {
-        alert('Receita atualizada com sucesso!');
+        alert('Receita atualizada com sucesso! ദ്ദി ˉ͈̀꒳ˉ͈́ )✧');
         this.router.navigate(['/my-recipes']); // Redireciona após salvar
       },
       (error) => {
         console.error('Erro ao atualizar a receita:', error);
-        alert('Erro ao atualizar a receita. Por favor, tente novamente.');
+        alert('Erro ao atualizar a receita. Por favor, tente novamente. (╥‸╥)');
       }
     );
   }

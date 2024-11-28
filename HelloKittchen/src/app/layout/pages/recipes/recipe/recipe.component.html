@@ -27,12 +27,12 @@
     <div id="carouselExample" class="carousel slide">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img [src]="receita.images[0].url" class="d-block w-100 h-100" alt="...">
+          <img alt="Imagem da receita" [src]="receita.images[0].url" class="d-block w-100 h-100" alt="...">
         </div>
         @for (imagem of receita.images; track $index) {
         @if($index !== 0){
         <div class="carousel-item">
-          <img [src]="imagem.url" class="d-block w-100 h-100" alt="...">
+          <img alt="Imagem da receita" [src]="imagem.url" class="d-block w-100 h-100" alt="...">
         </div>
         }
         }
@@ -48,7 +48,7 @@
     </div>
     }@else {
     <div>
-      <img [src]="receita.images[0].url" class="d-block w-100 h-100" alt="...">
+      <img alt="Imagem da receita" [src]="receita.images[0].url" class="d-block w-100 h-100" alt="...">
     </div>
     }
     }
@@ -56,19 +56,19 @@
     <div class="post">
       <div class="text-post inside-post" style="font-size: 13px;">
         <!-- Informações Gerais -->
-        <p><strong>Categoria:</strong> {{ receita.category.name }}</p>
-        <p><strong>Tempo de Preparo:</strong> {{ receita.preparationTime }} minutos</p>
-        <p><strong>Porções:</strong> {{ receita.portion }}</p>
-        <p><strong>Calorias:</strong> {{ receita.calories }}</p>
-        <p><strong>Publicado por:</strong> {{ receita.user.name }}</p>
-        <p><strong>Data de Publicação:</strong> {{ receita.published_at | date }}</p>
+        <p><strong>🍓 Categoria:</strong> {{ receita.category.name }}</p>
+        <p><strong>🍊 Tempo de Preparo:</strong> {{ receita.preparationTime }} minutos</p>
+        <p><strong>🍓 Porções:</strong> {{ receita.portion }}</p>
+        <p><strong>🍊 Calorias:</strong> {{ receita.calories }}</p>
+        <p><strong>🍓 Publicado por:</strong> {{ receita.user.name }}</p>
+        <p><strong>🍊 Data de Publicação:</strong> {{ receita.published_at | date }}</p>
       </div>
     </div>
 
     <div class="post">
       <div class="text-post inside-post" style="font-size: 13px;">
         <!-- Ingredientes -->
-        <h6>Ingredientes:</h6>
+        <h6>🥝 Ingredientes 🥝</h6>
         <ul>
           @for (ingrediente of receita.ingredients; track $index) {
           <li>
@@ -82,7 +82,7 @@
     <div class="post">
       <div class="text-post inside-post" style="font-size: 13px;">
         <!-- Instruções -->
-        <h6>Instruções</h6>
+        <h6>🍉 Instruções 🍉</h6>
         <ol>
           @for (passo of receita.instructions; track $index) {
           <li>
@@ -95,7 +95,7 @@
 
     <div class="post">
       <div class="text-post inside-post" style="font-size: 13px;">
-        <h6 class="titulo">Avaliações</h6>
+        <h6 class="titulo">⭐ Avaliações ⭐</h6>
         @for(avaliacao of receita.ratings; track $index){
           <div class="border border-danger-subtle">
             <div class="avaliacao-header">
@@ -104,7 +104,7 @@
 
               <app-stars [score]="avaliacao.rating"></app-stars>
             </div>
-            <strong>Comentário: </strong>
+            <strong>💌 Comentário: </strong>
             <p class="avaliacao-comment">{{ avaliacao.comment }}</p>
           </div>
         }
@@ -116,7 +116,7 @@
 @if (user) {
 <article class="col-md-12 post">
   <div class="inside-post avaliacao d-flex align-items-center flex-column">
-    <h6>Deixe sua Avaliação</h6>
+    <h6>Deixe sua Avaliação! ⋆౨ৎ˚⟡˖ ࣪</h6>
     <select #InputStars class="form-select p-2 flex-fill" aria-label="Default select example">
       <option value="1">1 star (´•︵•`)</option>
       <option value="2">2 stars (ᴗ_ ᴗ。)</option>
