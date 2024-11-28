@@ -10,10 +10,12 @@ import { ReceitaService } from '../../../services/receita.service';
 import { Receita } from '../../../models/receita.model';
 import { StarsComponent } from "../../items/stars/stars.component";
 import { StarsService } from '../../../additional/stars.service';
+import { LoginComponent } from "./login/login.component";
+import { CadastroComponent } from "./cadastro/cadastro.component";
 @Component({
   selector: 'app-menu-perfil',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule, LoginComponent, CadastroComponent],
   templateUrl: './menu-perfil.component.html',
   styleUrl: './menu-perfil.component.scss'
 })
@@ -21,7 +23,6 @@ export class MenuPerfilComponent {
   user: Usuario | null = null;
   private http = inject(HttpClient); // Injeta o HttpClient
   // Dados para Login e Cadastro
-  loginData = { email: '', password: '' };
   registerData = { name: '', email: '', password: '' };
   isAuthenticated = false;
   public readonly imageService = inject(ImagesPerfilService);
@@ -61,27 +62,6 @@ export class MenuPerfilComponent {
     window.location.reload();
   }
 
-  login(event: Event) {
-    event.preventDefault();
-
-    const { email, password } = this.loginData;;
-    this.authService.login(email as string, password as string).subscribe({
-      next: () => {
-        window.location.reload();
-        alert(`Login realizado com sucesso! Bem-vindo(a), ${this.user!.name}`);
-      },
-      error: (resp) => {
-        this.errorMessage = resp.error.message;
-        console.log(resp.error.message);
-        alert('Opa, parece que você errou algum dado na hora de digitar!');
-        window.location.reload();
-      },
-    });
-
-    // Feche o modal de login
-    this.closeModal();
-  }
-
   closeModal(): void {
     const modalElement = document.getElementById('userModal');
     if (modalElement) {
@@ -96,32 +76,12 @@ export class MenuPerfilComponent {
     }
   }
 
-  register(event: Event) {
-    event.preventDefault(); // Evita recarregar a página ao submeter o formulário
-    this.http.post('http://localhost:3000/users', this.registerData).subscribe(
-      (response) => {
-        console.log('Cadastro realizado com sucesso:', response);
-        alert('Usuário cadastrado com sucesso!');
-        this.resetForms();
-        this.switchToLogin();
-      },
-      (error) => {
-        console.error('Erro ao cadastrar usuário:', error);
-        alert('Erro ao cadastrar usuário. Verifique os dados.');
-      }
-    );
-  }
-
   switchToLogin(): void {
     const loginTab = document.getElementById('pills-login-tab');
     loginTab?.click();
   }
 
-  resetForms() {
-    // Limpa os campos após o login ou cadastro
-    this.loginData = { email: '', password: '' };
-    this.registerData = { name: '', email: '', password: '' };
-  }
+
 
   updateUIForAuthenticatedUser(): void {
     this.isAuthenticated = true; // Variável de estado no componente
@@ -149,11 +109,11 @@ export class MenuPerfilComponent {
   }
 
   calcularEstrelas(): number{
-    var soma = 0;
-    var i = 0;
+    let soma = 0;
+    let i = 0;
     for (const receita of this.receitas) {
-      if(receita.published_at){
-        soma = receita.score;
+      if(receita.published_at && receita.score != null){
+        soma += receita.score;
         i++;
       }
     }

@@ -1,12 +1,12 @@
 <article class="col-md-12 post post-recipe-page" style="border-radius: 2%;">
   <div class="inside-post" style="border-radius: 2%;">
-    <h2 class="text-center">Postar Nova Receita</h2>
+    <h2 class="text-center">ʚ Postar Nova Receita ɞ</h2>
     <div class="d-flex flex-row">
       <!-- Formulário com validação -->
       <form #form="ngForm" (ngSubmit)="submitRecipe($event)" novalidate>
         <!-- Nome da Receita -->
         <div class="mb-4">
-          <label for="recipeName" class="form-label">Nome da Receita</label>
+          <label for="recipeName" class="form-label">🍓 Nome da Receita</label>
           <input
             type="text"
             class="form-control"
@@ -25,7 +25,7 @@
 
         <!-- Descrição -->
         <div class="mb-4">
-          <label for="recipeDescription" class="form-label">Descrição</label>
+          <label for="recipeDescription" class="form-label">🍇 Descrição</label>
           <textarea
             class="form-control"
             id="recipeDescription"
@@ -44,7 +44,7 @@
 
         <!-- Categoria -->
         <div class="mb-4">
-          <label for="recipeCategory" class="form-label">Categoria</label>
+          <label for="recipeCategory" class="form-label">🍉 Categoria</label>
           <select
             class="form-select"
             id="recipeCategory"
@@ -68,7 +68,7 @@
         <!-- Informações Adicionais -->
         <div class="row mb-4">
           <div class="col">
-            <label for="preparationTime" class="form-label">Tempo em minutos</label>
+            <label for="preparationTime" class="form-label">🍋 Tempo em minutos</label>
             <input
               type="number"
               class="form-control"
@@ -85,7 +85,7 @@
             }
           </div>
           <div class="col">
-            <label for="portion" class="form-label">Porções</label>
+            <label for="portion" class="form-label">🍑 Porções</label>
             <input
               type="number"
               class="form-control"
@@ -102,7 +102,7 @@
             }
           </div>
           <div class="col">
-            <label for="calories" class="form-label">Calorias</label>
+            <label for="calories" class="form-label">🥑 Calorias</label>
             <input
               type="number"
               class="form-control"
@@ -122,7 +122,7 @@
 
         <!-- Ingredientes -->
         <div class="mb-4">
-          <h4>Ingredientes</h4>
+          <h6>🍊 Ingredientes</h6>
           @for(ingredient of ingredients; track $index){
             <div class="input-group mb-2">
               <input
@@ -167,7 +167,7 @@
         </div>
         <!-- Instruções -->
         <div class="mb-4">
-          <h4>Instruções</h4>
+          <h6>🍍 Instruções</h6>
           @for (instruction of instructions; track $index) {
             <div class="input-group mb-4">
               <textarea
@@ -197,7 +197,7 @@
 
         <!-- Upload de Imagem -->
         <div class="mb-4">
-          <h4>Imagem</h4>
+          <h6>🫐 Imagem</h6>
           <input
             type="file"
             class="form-control"
@@ -219,7 +219,7 @@
             [disabled]="!form.valid"
             class="btn btn-primary w-100"
           >
-            Salvar Receita
+          ⋆｡‧˚ʚ🍒 Salvar Receita 🍓ɞ˚‧｡⋆
           </button>
         </div>
       </form>

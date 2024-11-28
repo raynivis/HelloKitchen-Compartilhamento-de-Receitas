@@ -1,0 +1,13 @@
+<form (submit)="login($event)">
+  <div class="mb-3">
+    <label for="loginEmail" class="form-label">E-mail</label>
+    <input type="email" class="form-control" id="loginEmail" [(ngModel)]="loginData.email"
+      placeholder="Digite seu e-mail" name="email" required>
+  </div>
+  <div class="mb-3">
+    <label for="loginPassword" class="form-label">Senha</label>
+    <input type="password" class="form-control" id="loginPassword" [(ngModel)]="loginData.password"
+      placeholder="Digite sua senha" name="password" required>
+  </div>
+  <button type="submit" class="btn btn-primary w-100">Entrar</button>
+</form>
