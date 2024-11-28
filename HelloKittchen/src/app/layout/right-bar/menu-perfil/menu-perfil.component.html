@@ -1,6 +1,7 @@
 <div class="perfil-menu d-flex justify-content-center row d-flex align-items-center text-center">
   @if (isAuthenticated) {
-  <img (click)="openModalEdit()" class="foto" [src]="imageService.getPerfilAleatorio(user?.email?.length!)" alt="foto de perfil do usuário">
+  <img (click)="openModalEdit()" class="foto" [src]="imageService.getPerfilAleatorio(user?.email?.length!)"
+    alt="foto de perfil do usuário">
   <p class="nome">
     {{ user?.name }}
   </p>
@@ -8,13 +9,18 @@
 
   <ul class="star-perfil">
     <li *ngFor="let star of starsService.generateStarArray(calcularEstrelas())">
-      <svg *ngIf="star === 'full'" xmlns="http://www.w3.org/2000/svg" height="13px" viewBox="0 -960 960 960" width="15px" fill="#f8d92a">
-        <path d="m352-293 128-76 129 76-34-144 111-95-147-13-59-137-59 137-147 13 112 95-34 144ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
+      <svg *ngIf="star === 'full'" xmlns="http://www.w3.org/2000/svg" height="13px" viewBox="0 -960 960 960"
+        width="15px" fill="#f8d92a">
+        <path
+          d="m352-293 128-76 129 76-34-144 111-95-147-13-59-137-59 137-147 13 112 95-34 144ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
       </svg>
-      <svg *ngIf="star === 'half'" xmlns="http://www.w3.org/2000/svg" height="13px" viewBox="0 -960 960 960" width="15px" fill="#f8d92a">
-        <path d="m609-293-34-144 111-95-147-13-59-137v313l129 76ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
+      <svg *ngIf="star === 'half'" xmlns="http://www.w3.org/2000/svg" height="13px" viewBox="0 -960 960 960"
+        width="15px" fill="#f8d92a">
+        <path
+          d="m609-293-34-144 111-95-147-13-59-137v313l129 76ZM243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
       </svg>
-      <svg *ngIf="star === 'empty'" xmlns="http://www.w3.org/2000/svg" height="13px" viewBox="0 -960 960 960" width="15px" fill="#ddd">
+      <svg *ngIf="star === 'empty'" xmlns="http://www.w3.org/2000/svg" height="13px" viewBox="0 -960 960 960"
+        width="15px" fill="#ddd">
         <path d="m243-144l63-266L96-589l276-24 108-251 108 252 276 23-210 179 63 266-237-141-237 141Z" />
       </svg>
     </li>
@@ -24,8 +30,8 @@
     <image width="88" height="60" href="assets/gifs/gifDireita.gif"></image>
   </svg>
   <button class="botao-menu" [routerLink]="'/books'">
-    <p class="text-sans" style=" color: #81c281;"><img src="assets/auxiliares/cereja.png" width="14" height="12"
-        alt=""> books </p>
+    <p class="text-sans" style=" color: #81c281;"><img src="assets/auxiliares/cereja.png" width="14" height="12" alt="">
+      books </p>
   </button>
   <button class="botao-menu" [routerLink]="'/my-recipes'">
     <p> my recipes</p>
@@ -34,14 +40,14 @@
     <p>sign out</p>
   </button>
   } @else {
-    <img class="fotoSem" src="assets/icons/logout.png" alt="">
-    <button type="button" class="botao-menu" data-bs-toggle="modal" data-bs-target="#userModal">
-      <p> login </p>
-    </button>
-    <p>
-      acesse sua conta para ter uma melhor interação no nosso site (✿◕‿◕)ﾉ
-    </p>
-    <img src="assets/gifs/gifDireita.gif" alt="" style="left: 0;
+  <img class="fotoSem" src="assets/icons/logout.png" alt="">
+  <button type="button" class="botao-menu" data-bs-toggle="modal" data-bs-target="#userModal">
+    <p> login </p>
+  </button>
+  <p>
+    acesse sua conta para ter uma melhor interação no nosso site (✿◕‿◕)ﾉ
+  </p>
+  <img src="assets/gifs/gifDireita.gif" alt="" style="left: 0;
     top: 0;
     width: 95px;
     height: 60px;">
@@ -76,40 +82,13 @@
         <div class="tab-content" id="pills-tabContent">
           <!-- Formulário de Login -->
           <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
-            <form (submit)="login($event)">
-              <div class="mb-3">
-                <label for="loginEmail" class="form-label">E-mail</label>
-                <input type="email" class="form-control" id="loginEmail" [(ngModel)]="loginData.email"
-                  placeholder="Digite seu e-mail" name="email" required>
-              </div>
-              <div class="mb-3">
-                <label for="loginPassword" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="loginPassword" [(ngModel)]="loginData.password"
-                  placeholder="Digite sua senha" name="password" required>
-              </div>
-              <button type="submit" class="btn btn-primary w-100">Entrar</button>
-            </form>
+            <app-login></app-login>
           </div>
+
           <!-- Formulário de Cadastro -->
           <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="pills-register-tab">
-            <form (submit)="register($event)">
-              <div class="mb-3">
-                <label for="registerName" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="registerName" [(ngModel)]="registerData.name"
-                  placeholder="Digite seu nome" name="name" required>
-              </div>
-              <div class="mb-3">
-                <label for="registerEmail" class="form-label">E-mail</label>
-                <input type="email" class="form-control" id="registerEmail" [(ngModel)]="registerData.email"
-                  placeholder="Digite seu e-mail" name="email" required>
-              </div>
-              <div class="mb-3">
-                <label for="registerPassword" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="registerPassword" [(ngModel)]="registerData.password"
-                  placeholder="Digite sua senha" name="password" required>
-              </div>
-              <button type="submit" class="btn btn-success w-100">Cadastrar</button>
-            </form>
+            <app-cadastro></app-cadastro>
+
           </div>
         </div>
       </div>
@@ -120,32 +99,33 @@
 @if (isAuthenticated) {
 <!--Modal Edits-->
 <div class="modal fade text-card" #usuarioEditarModal tabindex="-1" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-  <div class="modal-content form-modal">
-    <div class="modal-header">
-      <div class="post" style="border-radius: 45%;">
-        <div class="inside-post" style="border-radius: 45%;">
-          <p style="
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content form-modal">
+      <div class="modal-header">
+        <div class="post" style="border-radius: 45%;">
+          <div class="inside-post" style="border-radius: 45%;">
+            <p style="
    font-family: 'PixelSix00', sans-serif; color: #f4b9cf; font-size: 11px; height: 1px;">
-            Editar Nome de usuario
-          </p>
+              Editar Nome de usuario
+            </p>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img class="border border-2" [src]="imageService.getPerfilAleatorio(user?.email?.length!)"
+          alt="foto de perfil do usuário">
+        <div class="mb-3 text-center">
+          <label for="formedit" class="form-label">Novo Nome de Usuario</label>
+          <input #InputNome type="text" class="form-control" id="formedit">
         </div>
       </div>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-      <img class="border border-2" [src]="imageService.getPerfilAleatorio(user?.email?.length!)" alt="foto de perfil do usuário">
-      <div class="mb-3 text-center">
-        <label for="formedit" class="form-label">Novo Nome de Usuario</label>
-        <input #InputNome type="text" class="form-control" id="formedit">
+      <div class="modal-footer">
+        <button (click)="salvarUsuario()" type="button"
+          class="btn botao-menu d-flex align-items-center">salvar!</button>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button (click)="salvarUsuario()" type="button" class="btn botao-menu d-flex align-items-center">salvar!</button>
     </div>
   </div>
 </div>
-</div>
 }
-

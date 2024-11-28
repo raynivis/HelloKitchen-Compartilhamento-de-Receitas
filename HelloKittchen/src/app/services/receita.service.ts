@@ -17,6 +17,16 @@ export class ReceitaService {
     return this.http.get<Pagination<Receita>>(this.API);
   }
 
+  listPage(page: number, limit: number): Observable<{ items: Receita[]; totalPages: number }> {
+    const url = `${this.API}?page=${page}&limit=${limit}`;
+    return this.http.get<Pagination<Receita>>(url).pipe(
+      map(response => ({
+        items: response.items,
+        totalPages: response.meta.totalPages ?? 0 // Usa 0 se totalPages for undefined
+      }))
+    );
+  }
+
   getAllRecipes(): Observable<Receita[]> {
     return this.http.get<{ items: Receita[]; meta: any }>(this.API).pipe(
       map((response) => {

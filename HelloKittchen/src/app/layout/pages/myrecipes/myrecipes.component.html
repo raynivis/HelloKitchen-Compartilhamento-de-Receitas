@@ -50,14 +50,6 @@
 
     <div>
       @if(!receita.published_at){
-        <button class="btn btn-CRUD texto-titulo" type="button" style="font-size: 12px; margin-right: 5px;">
-          <svg width="30" height="25">
-            <image href="assets/gifs/post-hello2.gif" width="30" height="25">
-            </image>
-          </svg>
-          Ver Receita
-        </button>
-
         <button (click)="publicarReceita(receita)" class="btn btn-CRUD texto-titulo" type="button" style="font-size: 12px;">
           <svg width="40" height="25">
             <image width="40" height="25" href="assets/gifs/post-hello.gif"></image>
