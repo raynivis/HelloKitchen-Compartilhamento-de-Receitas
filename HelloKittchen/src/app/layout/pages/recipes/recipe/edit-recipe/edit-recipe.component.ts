@@ -8,6 +8,7 @@ import { Receita } from '../../../../../models/receita.model';
 import { Categoria } from '../../../../../models/categoria.model';
 import { Ingrediente } from '../../../../../models/ingrediente.model';
 import { Instrucao } from '../../../../../models/instrucao.model';
+import { AuthService } from '../../../../../services/auth.service';
 
 @Component({
   selector: 'app-edit-recipe',
@@ -29,7 +30,12 @@ export class EditRecipeComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private recipeId: number = 0;
+  private readonly authService = inject(AuthService);
+
   ngOnInit(): void {
+    if(!this.authService.isLoggedIn()){
+      this.router.navigate(['/opss']);
+    }
     this.recipeId = Number(this.route.snapshot.params['id']); // Obtém o ID da receita pela rota
     this.loadRecipe(this.recipeId); // Carrega os dados da receita
     this.loadCategories(); // Carrega as categorias disponíveis
@@ -39,10 +45,10 @@ export class EditRecipeComponent implements OnInit {
   loadRecipe(id: number): void {
     this.receitaService.getMyRecipes().subscribe((dado) => {
       this.receitas = dado.items;
-  
+
       // Busca a receita com o ID correspondente
       const receitaEncontrada = this.receitas.find((receita) => receita.id === id);
-  
+
       if (receitaEncontrada) {
         this.receitas[0] = receitaEncontrada; // Define a receita encontrada
         this.ingredients = [...this.receitas[0].ingredients]; // Preenche os ingredientes
@@ -52,7 +58,7 @@ export class EditRecipeComponent implements OnInit {
       }
     });
   }
-  
+
 
   // Carregar categorias
   loadCategories(): void {

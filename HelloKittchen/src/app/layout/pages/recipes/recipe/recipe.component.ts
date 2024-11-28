@@ -42,8 +42,18 @@ export class RecipeComponent implements OnInit{
   });
   }
 
+  denunciar(){
+    var resposta = confirm('Você deseja mesmo denunciar esse comentário? (,,Ծ‸Ծ,, )');
+    if(resposta){
+      alert('Denúncia enviada! ৻(  •̀ ᗜ •́  ৻) ')
+    }
+  }
 
   adicionarAvaliacao(){
+    if(!this.InputComment.nativeElement.value){
+      alert('Você deve preencher um comentário para enviar essa avaliação! ʕ •ᴥ•ʔ');
+      return;
+    }
     var novaAvaliacao = { "rating": Number(this.InputStars.nativeElement.value), "comment": this.InputComment.nativeElement.value};
     this.receitasService.adicionarAvaliacao(novaAvaliacao, this.receita.id).subscribe();
     alert('Avaliação enviada ao Usuário! ε(´｡•᎑•`)っ 💕');

@@ -17,15 +17,40 @@ export class NewsComponent implements OnInit{
   public readonly imageService = inject(ImagesPerfilService);
   private readonly receitaService = inject(ReceitaService);
   receitas: Receita[] = [];
+  currentPage: number = 1;
+  totalPages: number = 1;
+  limit: number = 5;
 
   ngOnInit(): void {
-    this.receitaService.getAllRecipes().subscribe(dado => {
-      this.receitas = dado;
+    this.organizarReceitas();
+  }
+
+  organizarReceitas(){
+    this.receitaService.listPage(this.currentPage, this.limit).subscribe(({ items, totalPages }) => {
+      this.receitas = items;
       this.receitas.sort((a, b) => {
         return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
       });
+      this.totalPages = totalPages;
     });
   }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.organizarReceitas();
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.organizarReceitas();
+    }
+  }
+
+
+
 
 
 

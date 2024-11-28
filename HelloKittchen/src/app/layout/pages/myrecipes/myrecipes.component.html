@@ -28,7 +28,7 @@
   <div class="inside-post d-flex justify-content-between">
     <div>
       <div class="d-flex flex-row">
-        @if (!receita.published_at) {
+        @if(!receita.published_at && !receitaNoLivro(receita.id)) {
           <button (click)="openModalDelete(receita.id)" class="opp-button card shadow m-1">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#cd2454">
               <path

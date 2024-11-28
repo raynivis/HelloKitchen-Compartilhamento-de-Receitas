@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit{
   receitas: Receita[] = [];
   currentPage: number = 1;
   totalPages: number = 1;
-  limit: number = 3;
+  limit: number = 2;
 
   ngOnInit(): void {
     this.organizarReceitas();

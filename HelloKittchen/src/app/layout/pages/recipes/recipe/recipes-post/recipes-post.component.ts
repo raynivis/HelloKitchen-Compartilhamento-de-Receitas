@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReceitaService } from '../../../../../services/receita.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Categoria } from '../../../../../models/categoria.model';
 import { CategoriaService } from '../../../../../services/categoria.service';
 import { environment } from '../../../../../additional/environment.backend';
+import { AuthService } from '../../../../../services/auth.service';
 
 @Component({
   selector: 'app-cook-post',
@@ -33,8 +34,13 @@ export class ReceitaPostComponent {
   selectedFile: File | null = null;
   categorias: Categoria[] = [];
   fileSelected = false;
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
   ngOnInit(): void {
+    if(!this.authService.isLoggedIn()){
+      this.router.navigate(['/opss']);
+    }
     this.categoriasService.list().subscribe((dado) => {
       this.categorias = dado;
     });

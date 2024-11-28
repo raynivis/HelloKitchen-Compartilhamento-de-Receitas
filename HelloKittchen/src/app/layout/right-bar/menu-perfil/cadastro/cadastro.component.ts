@@ -16,6 +16,12 @@ export class CadastroComponent {
 
   register(event: Event) {
     event.preventDefault(); // Evita recarregar a página ao submeter o formulário
+    if (!this.validaPassword(this.registerData.password)){
+      alert('A senha deve conter pelo menos uma letra maiúscula, um número e um símbolo.');
+      return;
+    }
+
+
     this.http.post('http://localhost:3000/users', this.registerData).subscribe(
       (response) => {
         console.log('Cadastro realizado com sucesso:', response);
@@ -27,6 +33,15 @@ export class CadastroComponent {
         alert('Erro ao cadastrar usuário. Verifique os dados.');
       }
     );
+  }
+
+  validaPassword(password: string): boolean {
+    // Critérios
+    const hasUpperCase = /[A-Z]/.test(password); // Verifica se tem letra maiúscula
+    const hasNumber = /\d/.test(password); // Verifica se tem número
+    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password); // Verifica se tem símbolo
+
+    return hasUpperCase && hasNumber && hasSymbol;
   }
 
 
