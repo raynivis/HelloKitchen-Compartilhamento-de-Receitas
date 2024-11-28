@@ -1,0 +1,18 @@
+<form (submit)="register($event)">
+  <div class="mb-3">
+    <label for="registerName" class="form-label">Nome</label>
+    <input type="text" class="form-control" id="registerName" [(ngModel)]="registerData.name"
+      placeholder="Digite seu nome" name="name" required>
+  </div>
+  <div class="mb-3">
+    <label for="registerEmail" class="form-label">E-mail</label>
+    <input type="email" class="form-control" id="registerEmail" [(ngModel)]="registerData.email"
+      placeholder="Digite seu e-mail" name="email" required>
+  </div>
+  <div class="mb-3">
+    <label for="registerPassword" class="form-label">Senha</label>
+    <input type="password" class="form-control" id="registerPassword" [(ngModel)]="registerData.password"
+      placeholder="Digite sua senha" name="password" required>
+  </div>
+  <button type="submit" class="btn btn-success w-100">Cadastrar</button>
+</form>
