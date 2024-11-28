@@ -17,7 +17,7 @@
             </div>
           </div>
         </div>
-        <h5>{{receita.name}}</h5>
+        <h5 [title]="receita.name">{{ receita.name }}</h5>
         <p>{{receita.description}}</p>
         <app-stars [score]="receita.score"></app-stars>
       </div>
@@ -97,24 +97,36 @@
       <div class="text-post inside-post" style="font-size: 13px;">
         <h6 class="titulo">⭐ Avaliações ⭐</h6>
         @for(avaliacao of receita.ratings; track $index){
-          <div class="border border-danger-subtle">
-            <div class="avaliacao-header">
-
-              <!--NOMES E RECEITASS-->
-
-
-              <app-stars [score]="avaliacao.rating"></app-stars>
-            </div>
-            <strong>💌 Comentário: </strong>
-            <p class="avaliacao-comment">{{ avaliacao.comment }}</p>
+        <div class="border border-danger-subtle">
+          <div class="avaliacao-header">
+            <app-stars [score]="avaliacao.rating"></app-stars>
           </div>
+          <strong>💌 Comentário: </strong>
+          <div class="d-flex flex-row justify-content-between">
+            <div class="p-2">
+              <p class="avaliacao-comment">{{ avaliacao.comment }}
+              </p>
+            </div>
+            <div class="p-2">
+              <button (click)="denunciar()" class="opp-button card shadow m-1" style="background-color: transparent;">
+                <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="24px"
+                  fill="#cf585b">
+                  <path
+                    d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm-40-160h80v-240h-80v240ZM330-120 120-330v-300l210-210h300l210 210v300L630-120H330Zm34-80h232l164-164v-232L596-760H364L200-596v232l164 164Zm116-280Z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div>
+          </div>
+        </div>
         }
       </div>
     </div>
   </div>
 </article>
 
-@if (user && receita.published_at) {
+@if (user && receita.published_at && receita.user.id != user.id) {
 <article class="col-md-12 post">
   <div class="inside-post avaliacao d-flex align-items-center flex-column">
     <h6>Deixe sua Avaliação! ⋆౨ৎ˚⟡˖ ࣪</h6>

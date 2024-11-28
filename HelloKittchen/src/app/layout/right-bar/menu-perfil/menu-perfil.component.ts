@@ -113,7 +113,6 @@ export class MenuPerfilComponent {
     let i = 0;
     for (const receita of this.receitas) {
       if(receita.published_at && receita.score != null){
-        console.log(receita.score);
         soma += receita.score;
         i++;
       }

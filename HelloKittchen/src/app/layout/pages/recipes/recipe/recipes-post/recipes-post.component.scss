@@ -1,15 +1,21 @@
 .post-recipe-page {
-  
+
+    input, textarea{
+      font-size: 14px;
+    }
+
     h2, h6{
       color: #4a291e; /* Cor marrom para título */
       font-weight: bold;
+      font-size: 17px;
     }
-  
+
     label {
       font-weight: bold;
       color: #4a291e;
+      font-size: 14px;
     }
-  
+
     .form-control {
       border-radius: 6px;
       border: 1px solid #ddd;
@@ -18,8 +24,9 @@
         box-shadow: 0 0 5px rgba(74, 41, 30, 0.5);
       }
     }
-  
+
     .btn {
+      font-size: 15px;
       font-weight: bold;
       &.btn-primary {
         background-color: #4a291e;
@@ -44,4 +51,3 @@
       }
     }
   }
-  

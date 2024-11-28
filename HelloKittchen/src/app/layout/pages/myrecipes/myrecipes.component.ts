@@ -5,6 +5,8 @@ import { ReceitaService } from '../../../services/receita.service';
 import { PostRecipeComponent } from "../../items/post-recipe/post-recipe.component";
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { LivroService } from '../../../services/livro.service';
+import { Livro } from '../../../models/livro.model';
 
 @Component({
   selector: 'app-myrecipes',
@@ -20,6 +22,8 @@ export class MyrecipesComponent implements OnInit{
   livroReceitaDelete!: number;
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly livrosService = inject(LivroService);
+  livros: Livro[] = [];
 
 
   ngOnInit(): void {
@@ -31,7 +35,22 @@ export class MyrecipesComponent implements OnInit{
       this.receitas.sort((a, b) => {
         return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
       });
-    })
+    });
+    this.livrosService.list().subscribe({
+      next: (dado) => {
+        this.livros = dado.items;
+      }
+    });
+  }
+
+  receitaNoLivro(receitaId: number): boolean {
+    for (const livro of this.livros) {
+      const esta = livro.recipes.find((recipe: any) => recipe.recipe.id === receitaId);
+      if (esta) {
+        return true;
+      }
+    }
+    return false;
   }
 
   abrirReceita(id: number): void {

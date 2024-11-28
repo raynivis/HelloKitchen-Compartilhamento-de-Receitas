@@ -1,0 +1,53 @@
+.post-recipe-page {
+
+  input, textarea{
+    font-size: 14px;
+  }
+
+  h2, h6{
+    color: #4a291e; /* Cor marrom para título */
+    font-weight: bold;
+    font-size: 17px;
+  }
+
+  label {
+    font-weight: bold;
+    color: #4a291e;
+    font-size: 14px;
+  }
+
+  .form-control {
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    &:focus {
+      border-color: #4a291e;
+      box-shadow: 0 0 5px rgba(74, 41, 30, 0.5);
+    }
+  }
+
+  .btn {
+    font-size: 15px;
+    font-weight: bold;
+    &.btn-primary {
+      background-color: #4a291e;
+      border-color: #4a291e;
+      &:hover {
+        background-color: #3a2116;
+      }
+    }
+    &.btn-success {
+      background-color: #b9da9b;
+      border-color: #84cf3d;
+      &:hover {
+        background-color: #8bc554;
+      }
+    }
+    &.btn-danger {
+      background-color: #f0a748;
+      border-color: #f0a748;
+      &:hover {
+        background-color: #c05b3a;
+      }
+    }
+  }
+}

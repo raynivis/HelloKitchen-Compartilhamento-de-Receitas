@@ -28,5 +28,9 @@ export class LivroService {
     return this.http.delete<undefined>(`${this.API}/${id}`);
   }
 
+  getBook(id: number): Observable<Livro>{
+    return this.http.get<Livro>(`${this.API}/${id}`);
+  }
+
 
 }

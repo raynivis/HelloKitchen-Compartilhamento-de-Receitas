@@ -1,5 +1,5 @@
 <div class="d-flex flex-column mb-3 text-card d-flex align-items-center">
-  <p class="texto-titulo" style="font-size: 15px; "> ✩࿐࿔ Aqui estão as receitas cadastradas a seu livro! ✩࿐࿔  
+  <p class="texto-titulo" style="font-size: 15px; "> ✩࿐࿔ Aqui estão as receitas cadastradas a seu livro! ✩࿐࿔
   </p>
   <p>૮₍´˶• . • ⑅ ₎ა</p>
   <svg width="100" height="80">
@@ -38,7 +38,7 @@
           <label for="formedit" class="form-label">✩°Minhas Receitas:</label>
           <select #receitaId class="form-select" aria-label="Default select example">
             <option value="-1" selected>Selecione a Receita</option>
-            @for (receita of receitas; track $index) {
+            @for (receita of receitasAdicionar; track $index) {
               <option [value]="receita.id" >{{ receita.name }} - {{ receita.lastUpdated | date: 'dd/MM/yyyy HH:mm' }} </option>
             }
           </select>
