@@ -102,6 +102,7 @@
 
               <!--NOMES E RECEITASS-->
 
+
               <app-stars [score]="avaliacao.rating"></app-stars>
             </div>
             <strong>💌 Comentário: </strong>
@@ -113,7 +114,7 @@
   </div>
 </article>
 
-@if (user) {
+@if (user && receita.published_at) {
 <article class="col-md-12 post">
   <div class="inside-post avaliacao d-flex align-items-center flex-column">
     <h6>Deixe sua Avaliação! ⋆౨ৎ˚⟡˖ ࣪</h6>

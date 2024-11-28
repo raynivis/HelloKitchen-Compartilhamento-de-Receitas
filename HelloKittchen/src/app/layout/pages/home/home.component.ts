@@ -4,6 +4,7 @@ import { ContentWcComponent } from "./content-wc/content-wc.component";
 import { ReceitaService } from '../../../services/receita.service';
 import { Receita } from '../../../models/receita.model';
 import { PostRecipeComponent } from "../../items/post-recipe/post-recipe.component";
+import { Pagination } from 'nestjs-typeorm-paginate';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +16,33 @@ import { PostRecipeComponent } from "../../items/post-recipe/post-recipe.compone
 export class HomeComponent implements OnInit{
   private readonly receitasService = inject(ReceitaService);
   receitas: Receita[] = [];
+  currentPage: number = 1;
+  totalPages: number = 1;
+  limit: number = 3;
 
   ngOnInit(): void {
-    this.receitasService.list().subscribe((dado) => {
-      this.receitas = dado.items;
+    this.organizarReceitas();
+  }
+
+  organizarReceitas(){
+    this.receitasService.listPage(this.currentPage, this.limit).subscribe(({ items, totalPages }) => {
+      this.receitas = items;
+      this.totalPages = totalPages;
     });
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.organizarReceitas();
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.organizarReceitas();
+    }
   }
 
 

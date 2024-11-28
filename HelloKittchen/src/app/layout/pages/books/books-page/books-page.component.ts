@@ -1,10 +1,11 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { ImagesPerfilService } from '../../../../additional/images.perfil.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LivroReceitasService } from '../../../../services/livro.receitas.service';
 import { LivroReceita } from '../../../../models/livroReceita.model';
 import { BooksPageContentComponent } from "./books-page-content/books-page-content.component";
 import { StarsComponent } from "../../../items/stars/stars.component";
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-books-page',
@@ -24,14 +25,23 @@ export class BooksPageComponent implements OnInit{
   @ViewChild('Inputnotes') Inputnotes!: ElementRef<HTMLInputElement>;
   livroReceitaEdit!: LivroReceita;
   livroReceitaIdEdit!: number;
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
 
   ngOnInit(){
     this.route.params.subscribe(params => {
+      if(!this.authService.isLoggedIn()){
+        this.router.navigate(['/opss']);
+      }
 
       this.id = params['id']; //recebendo no id o get passado por parametro
       this.bookRecipeService.list(this.id).subscribe(dado => {this.receitaLivros = dado.items;})
     });
+  }
+
+  abrirReceita(id: number): void {
+    this.router.navigate(['/recipe', id]);
   }
 
   openModalEdit(idReceitaLivro: number) {

@@ -13,8 +13,8 @@
             </p>
           </div>
         </div>
-        <div [routerLink]="['/categoria', receita.category.id]" class="d-flex justify-content-end flex-fill ">
-          <p class="opp-button post-tag">{{receita.category.name}}</p>
+        <div class="d-flex justify-content-end flex-fill ">
+          <p [routerLink]="['/categoria', receita.category.id]" class="opp-button post-tag">{{receita.category.name}}</p>
         </div>
       </div>
       <h5>{{receita.name}}</h5>

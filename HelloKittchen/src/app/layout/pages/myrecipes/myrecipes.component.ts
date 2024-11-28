@@ -3,7 +3,8 @@ import { ContentMyrecipesComponent } from "./content-myrecipes/content-myrecipes
 import { Receita } from '../../../models/receita.model';
 import { ReceitaService } from '../../../services/receita.service';
 import { PostRecipeComponent } from "../../items/post-recipe/post-recipe.component";
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-myrecipes',
@@ -17,15 +18,24 @@ export class MyrecipesComponent implements OnInit{
   receitas: Receita[] = [];
   @ViewChild('receitaExcluirModal') modalElementDelete!: ElementRef;
   livroReceitaDelete!: number;
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
 
   ngOnInit(): void {
+    if(!this.authService.isLoggedIn()){
+      this.router.navigate(['/opss']);
+    }
     this.receitasService.getMyRecipes().subscribe(dado => {
       this.receitas = dado.items;
       this.receitas.sort((a, b) => {
         return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
       });
     })
+  }
+
+  abrirReceita(id: number): void {
+    this.router.navigate(['/recipe', id]);
   }
 
   publicarReceita(receita: Receita){
