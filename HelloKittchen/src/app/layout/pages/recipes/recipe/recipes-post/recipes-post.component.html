@@ -203,13 +203,7 @@
             class="form-control"
             (change)="onFileSelected($event)"
             accept=".png, .jpg, .jpeg, .svg"
-            required
           />
-          @if(form.submitted && !fileSelected){
-            <div class="text-danger">
-              Uma imagem é obrigatória.
-            </div>
-          }
         </div>
 
         <!-- Botão de Submissão -->

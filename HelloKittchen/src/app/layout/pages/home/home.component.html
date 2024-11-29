@@ -5,6 +5,7 @@
   </div>
 </article>
 
+@if (totalPages != 0) {
 <div>
   @if (!(currentPage === 1)) {
   <button class="opp-button m-1" (click)="previousPage()" [disabled]="currentPage === 1">
@@ -23,6 +24,8 @@
   </button>
   }
 </div>
+}
+
 
 
 
