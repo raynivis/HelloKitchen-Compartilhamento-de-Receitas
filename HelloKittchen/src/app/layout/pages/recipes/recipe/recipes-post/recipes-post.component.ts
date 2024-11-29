@@ -12,7 +12,7 @@ import { AuthService } from '../../../../../services/auth.service';
 @Component({
   selector: 'app-cook-post',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './recipes-post.component.html',
   styleUrl: './recipes-post.component.scss'
 })
@@ -28,8 +28,9 @@ export class ReceitaPostComponent {
     portion: 0,
     calories: 0,
   };
+  enviar: boolean = true;
 
-  ingredients = [{ name: '', amount: 0 , type: ''}];
+  ingredients = [{ name: '', amount: 0, type: '' }];
   instructions = [{ step: '' }];
   selectedFile: File | null = null;
   categorias: Categoria[] = [];
@@ -38,7 +39,7 @@ export class ReceitaPostComponent {
   private readonly router = inject(Router);
 
   ngOnInit(): void {
-    if(!this.authService.isLoggedIn()){
+    if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/opss']);
     }
     this.categoriasService.list().subscribe((dado) => {
@@ -74,32 +75,38 @@ export class ReceitaPostComponent {
     this.fileSelected = !!input.files?.length;
   }
 
+  naoPodeEnviar() {
+    this.enviar = false;
+  }
+
   submitRecipe(event: Event) {
-    event.preventDefault();
+    if (this.enviar) {
+      event.preventDefault();
+      // Enviar dados da receita
+      this.http.post(`${this.API}/recipes`, this.recipeData).subscribe((recipe: any) => {
+        const recipeId = recipe.id;
 
-    // Enviar dados da receita
-    this.http.post(`${this.API}/recipes`, this.recipeData).subscribe((recipe: any) => {
-      const recipeId = recipe.id;
+        // Enviar ingredientes
+        this.ingredients.forEach((ingredient) => {
+          this.http.post(`${this.API}/recipes/${recipeId}/ingredients`, ingredient).subscribe();
+        });
+        this.API
+        // Enviar instruções
+        this.instructions.forEach((instruction) => {
+          this.http.post(`${this.API}/recipes/${recipeId}/instructions`, instruction).subscribe();
+        });
 
-      // Enviar ingredientes
-      this.ingredients.forEach((ingredient) => {
-        this.http.post(`${this.API}/recipes/${recipeId}/ingredients`, ingredient).subscribe();
+        // Enviar imagem (se selecionada)
+        if (this.selectedFile) {
+          const formData = new FormData();
+          formData.append('file', this.selectedFile);
+          this.http.post(`${this.API}/recipes/${recipeId}/image`, formData).subscribe();
+        }
+
+        alert('Receita criada com sucesso!');
+        this.router.navigate(['/my-recipes']);
       });
-      this.API
-      // Enviar instruções
-      this.instructions.forEach((instruction) => {
-        this.http.post(`${this.API}/recipes/${recipeId}/instructions`, instruction).subscribe();
-      });
-
-      // Enviar imagem (se selecionada)
-      if (this.selectedFile) {
-        const formData = new FormData();
-        formData.append('file', this.selectedFile);
-        this.http.post(`${this.API}/recipes/${recipeId}/image`, formData).subscribe();
-      }
-
-      alert('Receita criada com sucesso!');
-    });
+    }
   }
 
 }
